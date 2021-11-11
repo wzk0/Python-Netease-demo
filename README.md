@@ -6,4 +6,4 @@
 python 网易云.py
 ```
 ## 参考:
-Node.js版网易云API
+[Node.js版网易云API](https://github.com/Binaryify/NeteaseCloudMusicApi)
