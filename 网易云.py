@@ -7,9 +7,11 @@ l = "lyric"
 s= "search"
 m = "mv"
 h = "hot"
+llink = "http://iwenwiki.com:3000"
 print("\n\n\n———————————————————————")
 print("网易云辅助demo！(´◊ω◊｀)\n")
 print("由听话的便当手打制作！٩(๑ᵒ̴̶̷͈᷄ᗨᵒ̴̶̷͈᷅)و")
+print("\n您当前的API服务器为:" + llink + "\n如需更换，请修改llink的值！")
 print("-----------------------------------------------------")
 print("0代表登陆，01:检查是否登陆(目前登陆没什么卵用(||๐_๐))\n1代表获取歌曲，2代表获取歌词，3代表搜索，\n4代表获取MV，5代表获取热评，6代表获取热搜，\n7代表获取歌手热门")
 print("-----------------------------------------------------")
@@ -19,7 +21,7 @@ if type == "0":
 
   phone = input("请输入手机号码:")
   password = input("请输入密码:")
-  url = "https://163.lpddr5.cn/login/cellphone?phone=" + phone +"&password=" + password
+  url = llink + "/login/cellphone?phone=" + phone +"&password=" + password
   r = requests.post(url)
   text = r.text
   temp = json.loads(text)
@@ -30,7 +32,7 @@ if type == "0":
 
 if type == "01":
 
-  url = "https://163.lpddr5.cn/login/status"
+  url = llink + "/login/status"
   r = requests.post(url)
   text = r.text
   temp = json.loads(text)
@@ -45,10 +47,10 @@ if type == "1":
 
   id = input("请输入歌曲ID:")
   print("已确定类型:" + s)
-  print("调用方法:song/url?id=" + id)
+  print("调用方法:/song/url?id=" + id)
   print("直链来啦！")
 
-  url1 = "https://163.lpddr5.cn/song/url?id=" + id
+  url1 = llink + "/song/url?id=" + id
   r = requests.post(url1)
   text = r.text
   temp = json.loads(text)
@@ -64,10 +66,10 @@ elif type == "2":
 
   id = input("请输入歌曲ID:")
   print("已确定类型:" + l)
-  print("调用方法:lyric?id=" + id)
+  print("调用方法:/lyric?id=" + id)
   print("歌词来啦！")
 
-  url2 = "https://163.lpddr5.cn/lyric?id=" + id
+  url2 = llink + "/lyric?id=" + id
   r = requests.post(url2)
   text = r.text
   temp = json.loads(text)
@@ -77,10 +79,10 @@ elif type == "3":
 
   word = input("请输入关键词:")
   print("已确定类型:" + s)
-  print("调用方法:search?keywords=" + word)
+  print("调用方法:/search?keywords=" + word)
   print("结果来啦！")
 
-  url3= "https://163.lpddr5.cn/search?keywords=" + word + "&limit=3"
+  url3= llink + "/search?keywords=" + word + "&limit=5"
   r = requests.post(url3)
   text = r.text
   temp = json.loads(text)
@@ -118,6 +120,28 @@ elif type == "3":
   print(temp['result']['songs'][2]['artists'][0]['name'])
   print("——————————————")
 
+  print("——————————————")
+  print("歌曲名称:")
+  print(temp['result']['songs'][3]['name'])
+  print("———————————")
+  print("歌曲ID:")
+  print(temp['result']['songs'][3]['id'])
+  print("—————————")
+  print("歌手:")
+  print(temp['result']['songs'][3]['artists'][0]['name'])
+  print("——————————————")
+
+  print("——————————————")
+  print("歌曲名称:")
+  print(temp['result']['songs'][4]['name'])
+  print("———————————")
+  print("歌曲ID:")
+  print(temp['result']['songs'][4]['id'])
+  print("—————————")
+  print("歌手:")
+  print(temp['result']['songs'][4]['artists'][0]['name'])
+  print("——————————————")
+
 elif type == "4":
 
   print (m)
@@ -128,9 +152,9 @@ elif type == "5":
   id = input("请输入资源ID:")
   type = input("请输入资源类型的序号:")
   print("已确定类型:" + h)
-  print("调用方法:comment/hot?id=" + id + "&type=" + type)
+  print("调用方法:/comment/hot?id=" + id + "&type=" + type)
   print("热评来啦！")
-  url5 = "https://163.lpddr5.cn/comment/hot?id=" + id + "&type=" + type + "&limit=5"
+  url5 = llink + "/comment/hot?id=" + id + "&type=" + type + "&limit=5"
   r = requests.post(url5)
   text = r.text
   temp = json.loads(text)
@@ -196,7 +220,8 @@ elif type == "5":
   print("——————————————")
 
 elif type == "6":
-  r = requests.post('https://163.lpddr5.cn/search/hot/')
+  urlll = llink + "/search/hot/"
+  r = requests.post(urlll)
   text = r.text
   temp = json.loads(text)
   print("———————————")
@@ -230,10 +255,12 @@ elif type == "6":
   print("第十名:")
   print(temp['result']['hots'][9]['first'])
   print("———————————")
+
 if type == "7":
 
   id = input("请输入歌手ID:")
-  url = "https://163.lpddr5.cn/artist/top/song?id=" + id
+  print("调用方法:/artist/top/song?id=" + id)
+  url = llink + "/artist/top/song?id=" + id
   r = requests.post(url)
   text = r.text
   temp = json.loads(text)
