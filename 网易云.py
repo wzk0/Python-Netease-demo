@@ -8,13 +8,18 @@ s= "search"
 m = "mv"
 h = "hot"
 llink = "http://iwenwiki.com:3000"
+
+## 备用:https://autumnfish.cn
+## 备用:http://iwenwiki.com:3000
+## 备用:http://119.45.25.73
+
 print("\n\n\n———————————————————————")
 print("网易云辅助demo！(´◊ω◊｀)\n")
 print("由听话的便当手打制作！٩(๑ᵒ̴̶̷͈᷄ᗨᵒ̴̶̷͈᷅)و")
 print("\n您当前的API服务器为:" + llink + "\n如需更换，请修改llink的值！")
-print("-----------------------------------------------------")
-print("0代表登陆，01:检查是否登陆(目前登陆没什么卵用(||๐_๐))\n1代表获取歌曲，2代表获取歌词，3代表搜索，\n4代表获取MV，5代表获取热评，6代表获取热搜，\n7代表获取歌手热门")
-print("-----------------------------------------------------")
+print("-----------------------------------------------")
+print("\n0)登陆(目前没什么卵用(||๐_๐))\n\n1)获取歌曲         2)获取歌词\n\n3)搜索             4)获取MV\n\n5)获取热评         6)获取热搜\n\n7)获取歌手热门\n")
+print("-----------------------------------------------")
 type = input ("请输入序号:")
 
 if type == "0":
@@ -29,19 +34,6 @@ if type == "0":
      print("已经成功登陆啦！❛‿˂̵✧")
   else:
      print("不知道什么原因失败了...\n请检查密码是否正确 (*꒦ິ⌓꒦ີ)")
-
-if type == "01":
-
-  url = llink + "/login/status"
-  r = requests.post(url)
-  text = r.text
-  temp = json.loads(text)
-  if temp['data']['code'] == 200:
-     print("是登陆状态！վ'ᴗ' ի")
-     print("——————————————")
-  else:
-     print("还没登陆呢！(꒪⌓꒪) ")
-     print("——————————————")
 
 if type == "1":
 
@@ -144,7 +136,13 @@ elif type == "3":
 
 elif type == "4":
 
-  print (m)
+  id = input("请输入MV的ID:")
+  print("调用方法:/mv/url?id=" + id)
+  url = llink + "/mv/url?id=" + id
+  r = requests.post(url)
+  text = r.text
+  temp = json.loads(text)
+  print(temp['data']['url'])
 
 elif type == "5":
 
