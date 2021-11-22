@@ -4,7 +4,7 @@ import os
 
 s = "song"
 l = "lyric"
-s= "search"
+se = "search"
 m = "mv"
 h = "hot"
 llink = "http://iwenwiki.com:3000"
@@ -70,7 +70,7 @@ elif type == "2":
 elif type == "3":
 
   word = input("请输入关键词:")
-  print("已确定类型:" + s)
+  print("已确定类型:" + se)
   print("调用方法:/search?keywords=" + word)
   print("结果来啦！")
 
