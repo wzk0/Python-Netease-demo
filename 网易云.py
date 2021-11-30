@@ -3,6 +3,7 @@
 import requests
 import json
 import os
+import wget
 
 s = "song"
 l = "lyric"
@@ -48,13 +49,40 @@ if type == "1":
   r = requests.post(url1)
   text = r.text
   temp = json.loads(text)
-  print("\033[34m——————————————\033[0m")
+  print("\033[34m—————————————————\033[0m")
   print("\033[36m高品质临时链接:\033[0m")
   print(temp['data'][0]['url'])
-  print("\033[34m——————————————\033[0m")
+  print("\033[34m—————————————————\033[0m")
   print("\033[36m永久直链:\033[0m")
   print("https://music.163.com/song/media/outer/url?id=" + id)
-  print("\033[34m——————————————\033[0m")
+  print("\033[34m—————————————————\033[0m\n")
+
+  print("\033[36m0) 继续     1) 下载 \n\n2) 在线听   3) 下载并播放\n")
+  print("\033[34m—————————————————\033[0m\n")
+  chooses = input("\033[36m请输入序号:\033[0m")
+
+  if chooses == "0":
+    os.system("python 网易云.py")
+
+  if chooses == "1":
+    name = id + ".mp3"
+    print("\033[36m\n下载进度:\033[0m")
+    fn = wget.download(temp['data'][0]['url'],name)
+    print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + fn)
+
+  if chooses == "2":
+    action = "play " + temp['data'][0]['url']
+    os.system(action)
+
+  if chooses == "3":
+    name = id + ".mp3"
+    print("\033[36m\n下载进度:\033[0m")
+    fn = wget.download(temp['data'][0]['url'],name)
+    print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
+    action = "play " + fn
+    os.system(action)
+
+
 
 elif type == "2":
 
