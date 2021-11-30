@@ -2,6 +2,12 @@
 
 > 第一个Python小项目——调用了网易云API以获取多个信息
 
+## 安装:
+
+```
+wget https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E6%98%93%E4%BA%91.py
+```
+
 ## 依赖:
 
 > 需要安装`requests`，`wget`插件
