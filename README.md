@@ -31,11 +31,11 @@ python 网易云.py
 
 ## 效果：
 
-![1]()
+![1](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/Screenshot_2021-11-30-14-58-52-65.jpg)
 
-![2]()
+![2](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/IMG_20211130_151442.jpg)
 
-![3]()
+![3](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/Screenshot_2021-11-30-14-57-46-45.jpg)
 
 ## 声明:
 
