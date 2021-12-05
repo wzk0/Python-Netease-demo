@@ -10,12 +10,13 @@ l = "lyric"
 se = "search"
 m = "mv"
 h = "hot"
-llink = "http://iwenwiki.com:3000"
+llink = "https://autumnfish.cn"
 
-## 备用:http://10.194.154.116:3000
-## 备用:https://autumnfish.cn
-## 备用:http://iwenwiki.com:3000
-## 备用:http://119.45.25.73
+## 备用: http://10.194.154.116:3000
+## 备用: https://autumnfish.cn
+## 备用: http://iwenwiki.com:3000
+## 备用: http://119.45.25.73
+## 备用: http://148.100.79.209:3000
 
 print("\n\n\n\033[34m————————————————————————\033[0m")
 print("\033[36m网易云辅助demo！(´◊ω◊｀)\033[0m")
@@ -36,15 +37,14 @@ if type == "0":
   text = r.text
   temp = json.loads(text)
   if temp['code'] == 200:
-     print("\033[36m\n已经成功登陆啦！❛‿˂̵✧\033[0m")
+    print("\033[36m\n已经成功登陆啦！❛‿˂̵✧\033[0m")
   else:
-     print("\033[36m\n不知道什么原因导致登陆失败了...\n请检查密码是否正确 (*꒦ິ⌓꒦ີ)\033[0m")
+    print("\033[36m\n不知道什么原因导致登陆失败了...\n请检查密码是否正确 (*꒦ິ⌓꒦ີ)\033[0m")
 
 if type == "1":
 
   id = input("\033[36m请输入歌曲ID:\033[0m")
   print("\033[31m直链来啦！\033[0m\n")
-
   url1 = llink + "/song/url?id=" + id
   r = requests.post(url1)
   text = r.text
@@ -56,11 +56,9 @@ if type == "1":
   print("\033[36m永久直链:\033[0m")
   print("https://music.163.com/song/media/outer/url?id=" + id)
   print("\033[34m—————————————————\033[0m\n")
-
   print("\033[36m0) 继续     1) 下载 \n\n2) 在线听   3) 下载并播放\n")
   print("\033[34m—————————————————\033[0m\n")
   chooses = input("\033[36m请输入序号:\033[0m")
-
   if chooses == "0":
     os.system("python 网易云.py")
 
@@ -82,13 +80,10 @@ if type == "1":
     action = "play " + fn
     os.system(action)
 
-
-
 elif type == "2":
 
   id = input("\033[36m请输入歌曲ID:\033[0m")
   print("\033[31m歌词来啦！\033[0m\n")
-
   url2 = llink + "/lyric?id=" + id
   r = requests.post(url2)
   text = r.text
