@@ -24,6 +24,12 @@ pip3 install wget
 pkg install sox
 ```
 
+或者
+
+```
+apt install sox
+```
+
 ## 启动：
 
 
