@@ -39,7 +39,7 @@ python 网易云.py
 
 ## 支持的功能:
 
-![如图所示]()
+![如图所示](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/IMG_20211211_014219.jpg)
 
 ## 参考:
 
