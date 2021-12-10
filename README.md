@@ -18,7 +18,7 @@ pip3 install requests
 pip3 install wget
 ```
 
-> 需要安装`sox`播放器:
+> 如果有播放需求，则需要安装`sox`播放器(`在线播放`还需安装wget):
 
 ```
 pkg install sox
@@ -37,17 +37,13 @@ apt install sox
 python 网易云.py
 ```
 
+## 支持的功能:
+
+![如图所示]()
+
 ## 参考:
 
 [Node.js版网易云API](https://github.com/Binaryify/NeteaseCloudMusicApi)
-
-## 效果：
-
-![1](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/Screenshot_2021-11-30-14-58-52-65.jpg)
-
-![2](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/IMG_20211130_151442.jpg)
-
-![3](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/Screenshot_2021-11-30-14-57-46-45.jpg)
 
 ## 声明:
 
