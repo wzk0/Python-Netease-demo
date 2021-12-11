@@ -171,7 +171,7 @@ if type == "0":
   temp = temp['cookie']
   print("\n\033[31m这是cookie(未删减)，请复制并打开cookie.txt:\033[m\n")
   print(temp)
-  print("\n\033[36m然后将其删减修改为这种格式:\n\033[m")
+  print("\n\033[36m然后将其删减修改为这种格式:(是我太菜了)\n\033[m")
   print("\033[31mNMTID=xxx; MUSIC_U=xxx; remember_me=true; csrf=xxx \033[0m")
 
 if type == "1":
@@ -202,7 +202,7 @@ if type == "1":
     print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + fn)
 
   if chooses == "2":
-    action = "play " + temp['data'][0]['url']
+    action = "nohup play " + temp['data'][0]['url'] + "&"
     os.system(action)
     os.system("python 网易云.py")
 
@@ -211,7 +211,7 @@ if type == "1":
     print("\033[36m\n下载进度:\033[0m")
     fn = wget.download(temp['data'][0]['url'],name)
     print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
-    action = "play " + fn
+    action = "nohup play " + fn + "&"
     os.system(action)
     os.system("python 网易云.py")
 
