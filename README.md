@@ -2,7 +2,7 @@
 
 > 第一个Python小项目——调用了网易云API以获取多个信息
 
-## 安装:
+## 安装(或者可以称为"获取"):
 
 ```
 wget https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E6%98%93%E4%BA%91.py
@@ -39,7 +39,7 @@ python 网易云.py
 
 ## 支持的功能:
 
-![如图所示](https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/IMG_20211211_014219.jpg)
+![如图所示](https://raw.githubusercontent.com/wzk0/photo/main/Screenshot_2021-12-11-14-16-05-44.jpg)
 
 ## 参考:
 
