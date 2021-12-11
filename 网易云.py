@@ -180,11 +180,16 @@ if type == "8":
   r = requests.get(url,cookies=cookies)
   temp = json.loads(r.text)
   if temp['code'] == 200:
-    print("\033[31m\n签到成功！૧(●´৺`●)૭\033[0m")
+    print("\033[31m\n每日签到成功！૧(●´৺`●)૭\033[0m")
   if temp['code'] == -2:
     print("\033[31m\n你已经签到过啦（ '▿ ' ）\033[0m")
   if temp['code'] == 301:
     print("\033[31m\n没登陆你签到个啥。。\033[0m")
+  urll = llink + "/yunbei/sign"
+  rr = requests.get(urll,cookies=cookies)
+  tem = json.loads(rr.text)
+  if tem['code'] == 200:
+    print("\033[31m\n云贝签到成功！૧(●´৺`●)૭\033[0m")
 
 if type == "0":
 
