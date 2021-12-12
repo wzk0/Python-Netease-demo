@@ -51,7 +51,7 @@ if type == "update":
     f.write(r.text)
   act = "chmod +x 网易云.py"
   os.system(act)
-  print("\033[31m更新完啦！你可以通过 \033[31m./网易云.py \033[0m来重启程序！\033[0m")
+  print("\033[31m更新完啦！现在你可以通过 \033[31m./网易云.py \033[0m来重启程序！\033[0m")
 
 if type == "14":
   id = input("\033[36m请输入歌曲ID:\033[0m")
