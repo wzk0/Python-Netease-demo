@@ -44,6 +44,10 @@ print("\n\033[32m0)\033[0m \033[36m登陆(输入以查看登陆方法说明)\033
 print("\033[34m-----------------------------------------------\033[0m")
 type = input ("\033[36m\n请输入序号:\033[0m")
 
+if type == "update":
+  action = "wget https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E6%98%93%E4%BA%91.py"
+  os.system(action)
+
 if type == "14":
   id = input("\033[36m请输入歌曲ID:\033[0m")
   url = llink + "/like?id=" + id
@@ -310,19 +314,17 @@ elif type == "5":
   r = requests.post(url,cookies=cookies)
   text = r.text
   temp = json.loads(text)
-
-  time = int(time)
-  while 0 <= time:
+  try:
     time = int(time)
-    print("\033[0;34;44m————————————————————————————————\033[0m")
-    print("\033[36m来自用户:\033[0m" + str(temp['hotComments'][time]['user']['nickname']) + "\033[36m的热评:\033[0m")
-    print("\n")
-    print(temp['hotComments'][time]['content'])
-    print("\n")
-    print("\033[31m点赞数:\033[0m" + str(temp['hotComments'][time]['likedCount']) + "\n")
-    time = int(time)
-    time -= 1
-
+    while 0 <= time:
+      time = int(time)
+      print("\033[37;45m" + str(temp['hotComments'][time]['user']['nickname']) + "\033[0m" + "\033[36m 的热评:\033[0m")
+      print("\033[30;47m" + temp['hotComments'][time]['content'] + "\033[0m")
+      print("\033[31m点赞数: \033[0m" + str(temp['hotComments'][time]['likedCount']) + "\n")
+      time = int(time)
+      time -= 1
+  except IndexError:
+      print("\033[36m一次性得不到这么多评论啦(或者这首歌评论很少)վ'ᴗ' ի")
 elif type == "6":
   url = llink + "/search/hot/"
   r = requests.post(url,cookies=cookies)
