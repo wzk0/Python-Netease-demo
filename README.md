@@ -41,6 +41,8 @@ python 网易云.py
 
 ![如图所示](https://raw.githubusercontent.com/wzk0/photo/main/Screenshot_2021-12-11-14-16-05-44.jpg)
 
+* 一键更新功能(输入`update`)
+
 ## 参考:
 
 [Node.js版网易云API](https://github.com/Binaryify/NeteaseCloudMusicApi)
