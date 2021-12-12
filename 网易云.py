@@ -45,8 +45,13 @@ print("\033[34m-----------------------------------------------\033[0m")
 type = input ("\033[36m\n请输入序号:\033[0m")
 
 if type == "update":
-  action = "wget https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E6%98%93%E4%BA%91.py"
-  os.system(action)
+  url = "https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E6%98%93%E4%BA%91.py"
+  r = requests.get(url)
+  with open('网易云.py', 'w') as f:
+    f.write(r.text)
+  act = "chmod +x 网易云.py"
+  os.system(act)
+  print("\033[31m更新完啦！你可以通过 \033[31m./网易云.py \033[0m来重启程序！\033[0m")
 
 if type == "14":
   id = input("\033[36m请输入歌曲ID:\033[0m")
