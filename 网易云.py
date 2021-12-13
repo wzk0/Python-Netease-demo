@@ -66,7 +66,7 @@ if type == "14":
 
 if type == "quit":
   print("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
-  sys.exit(0)
+  sys.exit(1)
 
 if type == "13":
   id = input("\033[36m请输入歌手ID:\033[0m")
@@ -238,7 +238,11 @@ if type == "1":
     os.system("python 网易云.py")
 
   if chooses == "1":
-    name = id + ".mp3"
+    ur = llink + "/song/detail?ids=" +id
+    rr = requests.get(ur,cookies=cookies)
+    tem = json.loads(rr.text)
+    name = tem['songs'][0]['name']
+    name = name + ".mp3"
     print("\033[36m\n下载进度:\033[0m")
     fn = wget.download(temp['data'][0]['url'],name)
     print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + fn)
@@ -249,7 +253,11 @@ if type == "1":
     os.system("python 网易云.py")
 
   if chooses == "3":
-    name = id + ".mp3"
+    ur = llink + "/song/detail?ids=" +id
+    rr = requests.get(ur,cookies=cookies)
+    tem = json.loads(rr.text)
+    name = tem['songs'][0]['name']
+    name = name + ".mp3"
     print("\033[36m\n下载进度:\033[0m")
     fn = wget.download(temp['data'][0]['url'],name)
     print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
