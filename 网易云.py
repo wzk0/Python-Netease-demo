@@ -51,7 +51,7 @@ if type == "update":
     f.write(r.text)
   act = "chmod +x 网易云.py"
   os.system(act)
-  print("\033[36m\n更新完啦！现在你可以通过 \033[0m\033[31m./网易云.py \033[0m\033[36m来重启程序！\033[0m")
+  print("\033[36m更新完啦！现在你可以通过 \033[0m\033[31m./网易云.py \033[0m\033[36m来重启程序！\033[0m")
 
 if type == "14":
   id = input("\033[36m请输入歌曲ID:\033[0m")
@@ -271,7 +271,7 @@ elif type == "3":
 
   word = input("\033[36m请输入关键词:\033[0m")
   time = input("\033[36m取出数量:\033[0m")
-  print("\033[31m结果来啦！多帮你查了一首噢(๑ت๑)\033[0m")
+  print("\033[31m结果来啦！多帮你查了一首噢(๑ت๑)\033[0m\n")
   time = int(time)
   limit = time + 1
   limit = str(limit)
@@ -281,19 +281,21 @@ elif type == "3":
   temp = json.loads(text)
 
   time = int(time)
-  while 0 <= time:
-    time = int(time)
-    t = time + 1
-    t = str(t)
-    print("\n\033[0;31;44m \033[0m")
-    print("第" + t + "首:")
-    time = int(time)
-    print("\033[31m##############\033[0m")
-    print("\033[34m歌曲名称: \033[0m" + str(temp['result']['songs'][time]['name'])+ "\n")
-    print("\033[34m歌曲ID: \033[0m" + str(temp['result']['songs'][time]['id']) + "\n")
-    print("\033[34m歌手: \033[0m" + str(temp['result']['songs'][time]['artists'][0]['name']))
-    time = int(time)
-    time -= 1
+  try:
+    while 0 <= time:
+      time = int(time)
+      t = time + 1
+      t = str(t)
+      time = int(time)
+      print("歌曲名称: \033[31m" + str(temp['result']['songs'][time]['name'])+ "\033[0m")
+      print("\033[34m  歌曲ID: \033[0m" + str(temp['result']['songs'][time]['id']))
+      print("歌手: \033[31m" + str(temp['result']['songs'][time]['artists'][0]['name']) + "\033[0m")
+      print("  \033[34m歌手ID: \033[0m" + str(temp['result']['songs'][time]['artists'][0]['id']))
+      print("专辑名称: \033[31m" + str(temp['result']['songs'][time]['album']['name']) + "\033[0m")
+      print("  \033[34m专辑ID: \033[0m" + str(temp['result']['songs'][time]['album']['id']) + "\n")
+      time -= 1
+  except IndexError and KeyError:
+    print("\033[36m一次性获取太多啦！(或者这首歌没有那么多版本)\033[0m")
 
 elif type == "4":
 
