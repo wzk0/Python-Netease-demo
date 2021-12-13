@@ -243,7 +243,8 @@ if type == "1":
     tem = json.loads(rr.text)
     name = tem['songs'][0]['name']
     ar = tem['songs'][0]['ar'][0]['name']
-    name = name + "-" + ar + ".mp3"
+    name = name + " - " + ar + ".mp3"
+    name = ''.join(name.split())
     print("\033[36m\n下载进度:\033[0m")
     fn = wget.download(temp['data'][0]['url'],name)
     print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + fn)
@@ -259,7 +260,8 @@ if type == "1":
     tem = json.loads(rr.text)
     name = tem['songs'][0]['name']
     ar = tem['songs'][0]['ar'][0]['name']
-    name = name + "-" + ar + ".mp3"
+    name = name + " - " + ar + ".mp3"
+    name = ''.join(name.split())
     print("\033[36m\n下载进度:\033[0m")
     fn = wget.download(temp['data'][0]['url'],name)
     print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
