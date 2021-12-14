@@ -66,7 +66,7 @@ if type == "14":
 
 if type == "quit":
   print("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
-  sys.exit(1)
+  os._exit(0)
 
 if type == "13":
   id = input("\033[36m请输入歌手ID:\033[0m")
@@ -182,7 +182,6 @@ if type == "9":
       print("\n")
       os.system("python 网易云.py")
 
-
 if type == "8":
 
   url = llink + "/daily_signin"
@@ -233,11 +232,12 @@ if type == "1":
   print("\033[34m—————————————————\033[0m\n")
   print("\033[36m0) 继续     1) 下载 \n\n2) 在线听   3) 下载并播放\n")
   print("\033[34m—————————————————\033[0m\n")
-  chooses = input("\033[36m请输入序号:\033[0m")
-  if chooses == "0":
+  choooses = input("\033[36m请输入序号:\033[0m")
+
+  if choooses == "0":
     os.system("python 网易云.py")
 
-  if chooses == "1":
+  if choooses == "1":
     ur = llink + "/song/detail?ids=" +id
     rr = requests.get(ur,cookies=cookies)
     tem = json.loads(rr.text)
@@ -249,12 +249,12 @@ if type == "1":
     fn = wget.download(temp['data'][0]['url'],name)
     print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + fn)
 
-  if chooses == "2":
+  if choooses == "2":
     action = "nohup play " + temp['data'][0]['url'] + "&"
     os.system(action)
     os.system("python 网易云.py")
 
-  if chooses == "3":
+  if choooses == "3":
     ur = llink + "/song/detail?ids=" +id
     rr = requests.get(ur,cookies=cookies)
     tem = json.loads(rr.text)
@@ -377,4 +377,4 @@ if re == "1":
   os.system("python 网易云.py")
 if re == "0":
   print("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
-  sys.exit(0)
+  os._exit(0)
