@@ -7,11 +7,6 @@ import os
 import wget
 import sys
 
-s = "song"
-l = "lyric"
-se = "search"
-m = "mv"
-h = "hot"
 llink = "http://139.59.227.215:3000"
 
 ## 备用: http://139.59.227.215:3000
@@ -33,6 +28,7 @@ cookies={}
 for line in f.read().split(';'):
   name,value=line.strip().split('=',2)
   cookies[name]=value
+
 
 print("\n\n\n\033[34m————————————————————————\033[0m")
 print("\033[36m网易云辅助demo！(´◊ω◊｀)\033[0m")
@@ -105,9 +101,23 @@ if type == "11":
   rr = requests.get(like,cookies=cookies)
   tem = json.loads(rr.text)
   tem = tem['ids']
-  print("\n\033[036m以下是你的收藏列表ID！\n\033[0m")
+  print("\033[36m接下来的过程比较漫长...如果想终止请输入\033[0m\033[36mCtrl C\n\033[0m")
   for te in tem:
-    print("\033[31m" + str(te) + "\033[0m",end="\n\n")
+    url = llink + "/song/detail?ids=" + str(te)
+    r = requests.get(url,cookies=cookies)
+    temp = json.loads(r.text)
+    temp = temp['songs'][0]
+    ar = temp['ar'][0]
+    al =temp['al']
+    try:
+      print("\n歌曲名: \033[36m" + temp['name'] + "\033[0m")
+      print("\033[31m 歌曲ID: \033[0m" + str(temp['id']))
+      print("歌手名: \033[36m" + ar['name'] + "\033[0m")
+      print("\033[31m 歌手ID: \033[0m" + str(ar['id']))
+      print("所属专辑: \033[36m" + al['name'] + "\033[0m")
+      print("\033[31m 专辑ID: \033[0m " + str(al['id']))
+    except KeyboardInterrupt:
+      print("\n\033[31m已停止！\033[0m")
 
 if type == "10":
   t = time.localtime()
@@ -209,7 +219,7 @@ if type == "0":
   print("\033[36m\n如果不想下载的话，可以按照下面的方法:\033[0m")
   r = requests.get(url)
   temp = json.loads(r.text)
-  temp = temp['cookie']
+  temp = str(temp['cookie'])
   print("\n\033[31m这是cookie(未删减)，请复制并打开cookie.txt:\033[m\n")
   print(temp)
   print("\n\033[36m然后将其删减修改为这种格式:(是我太菜了)\n\033[m")
