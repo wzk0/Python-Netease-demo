@@ -29,7 +29,6 @@ for line in f.read().split(';'):
   name,value=line.strip().split('=',2)
   cookies[name]=value
 
-
 print("\n\n\n\033[34m————————————————————————\033[0m")
 print("\033[36m网易云辅助demo！(´◊ω◊｀)\033[0m")
 print("\033[34m————————————————————————\n\033[0m")
@@ -154,7 +153,6 @@ if type == "9":
     if vip == "0":
       print("\033[36m诶，你不是会员诶 վ'ᴗ' ի")
 
-
   if do == "2":
     do = "/user/subcount"
     url = llink + do
@@ -233,6 +231,18 @@ if type == "1":
   r = requests.post(url,cookies=cookies)
   text = r.text
   temp = json.loads(text)
+  urll = llink + "/song/detail?ids=" +id
+  rr = requests.get(urll,cookies=cookies)
+  tem = json.loads(rr.text)
+  tem = tem['songs'][0]
+  ar = tem['ar'][0]
+  al =tem['al']
+  print("\033[36m关于这首歌的信息:\n\033[0m\n歌曲名: \033[36m" + tem['name'] + "\033[0m")
+  print("\033[31m 歌曲ID: \033[0m" + str(tem['id']))
+  print("歌手名: \033[36m" + ar['name'] + "\033[0m")
+  print("\033[31m 歌手ID: \033[0m" + str(ar['id']))
+  print("所属专辑: \033[36m" + al['name'] + "\033[0m")
+  print("\033[31m 专辑ID: \033[0m " + str(al['id']))
   print("\033[34m—————————————————\033[0m")
   print("\033[36m高品质临时链接:\033[0m")
   print(temp['data'][0]['url'])
@@ -258,11 +268,46 @@ if type == "1":
     print("\033[36m\n下载进度:\033[0m")
     fn = wget.download(temp['data'][0]['url'],name)
     print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + fn)
+    print("\n\033[36m是/否收藏?\033[0m")
+    like = input("\033[36my/n:\033[0m")
+    if like == "y":
+      url = llink + "/like?id=" + id
+      r = requests.post(url,cookies=cookies)
+      text = r.text
+      temp = json.loads(text)
+      if temp['code'] == 200:
+        print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
+      else:
+        print("\n\033[31m收藏失败︎了..不然你再试试?")
 
   if choooses == "2":
     action = "nohup play " + temp['data'][0]['url'] + "&"
     os.system(action)
-    os.system("python 网易云.py")
+    time.sleep(3)
+    print("\n\033[36m是/否下载?\033[0m")
+    download = input("\033[36my/n:\033[0m")
+    if download == "y":
+      ur = llink + "/song/detail?ids=" +id
+      rr = requests.get(ur,cookies=cookies)
+      tem = json.loads(rr.text)
+      name = tem['songs'][0]['name']
+      ar = tem['songs'][0]['ar'][0]['name']
+      name = name + " - " + ar + ".mp3"
+      name = ''.join(name.split())
+      print("\033[36m\n下载进度:\033[0m")
+      fn = wget.download(temp['data'][0]['url'],name)
+      print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
+    print("\n\033[36m是/否收藏?\033[0m")
+    like = input("\033[36my/n:\033[0m")
+    if like == "y":
+      url = llink + "/like?id=" + id
+      r = requests.post(url,cookies=cookies)
+      text = r.text
+      temp = json.loads(text)
+      if temp['code'] == 200:
+        print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
+      else:
+        print("\n\033[31m收藏失败了..不然你再试试?")
 
   if choooses == "3":
     ur = llink + "/song/detail?ids=" +id
@@ -277,7 +322,18 @@ if type == "1":
     print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
     action = "nohup play " + fn + "&"
     os.system(action)
-    os.system("python 网易云.py")
+    time.sleep(3)
+    print("\n\033[36m是/否收藏?\033[0m")
+    like = input("\033[36my/n:\033[0m")
+    if like == "y":
+      url = llink + "/like?id=" + id
+      r = requests.post(url,cookies=cookies)
+      text = r.text
+      temp = json.loads(text)
+      if temp['code'] == 200:
+        print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
+      else:
+        print("\n\033[31m收藏失败了..不然你再试试?")
 
 elif type == "2":
 
@@ -382,7 +438,6 @@ if type == "7":
   print(temp['artist']['briefDesc'])
 
 re = input("\033[35m\n输入1以继续获取；0为退出程序(๑ت๑):\033[0m")
-
 if re == "1":
   os.system("python 网易云.py")
 if re == "0":
