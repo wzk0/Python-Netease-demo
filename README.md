@@ -52,3 +52,7 @@ python 网易云.py
 我知道这个项目很辣鸡！还只是个小白！轻喷！谢谢！
 
 以后会努力的！
+
+## 星星
+
+[![Stargazers over time](https://starchart.cc/some6508/all.svg)](https://starchart.cc/some6508/all)
