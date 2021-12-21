@@ -130,7 +130,6 @@ if type == "10":
     print("歌手名: " + "\033[31m" + name['ar'][0]['name'])
     print(" \033[36m歌手ID: \033[0m" + str(name['ar'][0]['id']),end="\n\n")
 
-
 if type == "9":
   print("\033[36m\n1) 账户信息  2) 收藏信息\033[0m")
   do = input("\033[36m\n请输入序号:\033[0m")
@@ -283,7 +282,7 @@ if type == "1":
   if choooses == "2":
     action = "nohup play " + temp['data'][0]['url'] + "&"
     os.system(action)
-    time.sleep(3)
+    time.sleep(2)
     print("\n\033[36m是/否下载?\033[0m")
     download = input("\033[36my/n:\033[0m")
     if download == "y":
@@ -322,7 +321,7 @@ if type == "1":
     print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
     action = "nohup play " + fn + "&"
     os.system(action)
-    time.sleep(3)
+    time.sleep(2)
     print("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
