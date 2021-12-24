@@ -23,11 +23,24 @@ if not os.path.exists(filename):
     f.write("NMTID=xxx; MUSIC_U=xxx; remember_me=true; csrf=xxx")
   print("\033[31m\n未登陆！已创建临时cookie，保存在cookie.txt中！\033[0m")
 
+filename = 'music'
+if not os.path.exists(filename):
+  os.system("mkdir music")
+
 f=open(r'cookie.txt','r')
 cookies={}
 for line in f.read().split(';'):
   name,value=line.strip().split('=',2)
   cookies[name]=value
+
+def req(url):
+  r = requests.get(url,cookies=cookies)
+  global temp
+  temp = json.loads(r.text)
+
+def quit():
+  print("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
+  os._exit(0)
 
 print("\n\n\n\033[34m————————————————————————\033[0m")
 print("\033[36m网易云辅助demo！(´◊ω◊｀)\033[0m")
@@ -51,25 +64,20 @@ if type == "update":
 if type == "14":
   id = input("\033[36m请输入歌曲ID:\033[0m")
   url = llink + "/like?id=" + id
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   if temp['code'] == 200:
     print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
   else:
     print("\n\033[31m收藏失败了..不然你再试试?")
 
 if type == "quit":
-  print("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
-  os._exit(0)
+  quit()
 
 if type == "13":
   id = input("\033[36m请输入歌手ID:\033[0m")
   limit = input("\033[36m取出数量:\033[0m")
   url = llink + "/artist/songs?id=" + id + "&limit=" + limit
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   temp = temp['songs']
   for name in temp:
     print("\n歌名: \033[31m" + name['name'] + "\033[0m")
@@ -78,8 +86,7 @@ if type == "13":
 if type == "12":
   ids = input("\033[36m请输入歌曲ID:\033[0m")
   url = llink + "/song/detail?ids=" +ids
-  r = requests.get(url,cookies=cookies)
-  temp = json.loads(r.text)
+  req(url)
   temp = temp['songs'][0]
   ar = temp['ar'][0]
   al =temp['al']
@@ -93,8 +100,7 @@ if type == "12":
 if type == "11":
   do = "/user/account"
   url = llink + do
-  r = requests.get(url,cookies=cookies)
-  temp = json.loads(r.text)
+  req(url)
   uid = str(temp['account']['id'])
   like = llink + "/likelist?uid=" + uid
   rr = requests.get(like,cookies=cookies)
@@ -103,8 +109,7 @@ if type == "11":
   print("\033[36m接下来的过程比较漫长...如果想终止请输入\033[0m\033[36mCtrl C\n\033[0m")
   for te in tem:
     url = llink + "/song/detail?ids=" + str(te)
-    r = requests.get(url,cookies=cookies)
-    temp = json.loads(r.text)
+    req(url)
     temp = temp['songs'][0]
     ar = temp['ar'][0]
     al =temp['al']
@@ -122,8 +127,7 @@ if type == "10":
   t = time.localtime()
   print("\n\033[31m" + str(t.tm_year) + "年" +  str(t.tm_mon) + "月" + str(t.tm_mday) + "日" + "的日推来啦！\033[0m\n")
   url = llink + "/recommend/songs"
-  r = requests.get(url,cookies=cookies)
-  temp = json.loads(r.text)
+  req(url)
   for name in temp['data']['dailySongs']:
     print("歌名: " + "\033[31m" + name['name'])
     print(" \033[36m歌曲ID: \033[0m" + str(name['id']))
@@ -136,8 +140,7 @@ if type == "9":
   if do == "1":
     do = "/user/account"
     url = llink + do
-    r = requests.get(url,cookies=cookies)
-    temp = json.loads(r.text)
+    req(url)
     print("\033[31m\n你好啊！\033[0m" + str(temp['profile']['nickname']) + "\033[31m (⁎⁍̴̛͂▿⁍̴̛͂⁎)*✲ﾟ*\033[0m")
     print("\033[34m—————————————————\033[0m")
     print("\033[36m我的ID: \033[0m" + str(temp['account']['id']))
@@ -155,8 +158,7 @@ if type == "9":
   if do == "2":
     do = "/user/subcount"
     url = llink + do
-    r = requests.get(url,cookies=cookies)
-    temp = json.loads(r.text)
+    req(url)
     print("\n\033[34m—————————————————\033[0m")
     print("收藏的电台数:" + str(temp['djRadioCount']))
     print("\033[34m—————————————————\033[0m")
@@ -172,8 +174,7 @@ if type == "9":
     ty = input("\033[36m请输入序号:\033[0m")
     if ty == "1":
       url = llink + "/artist/sublist"
-      r = requests.get(url,cookies=cookies)
-      temp = json.loads(r.text)
+      req(url)
       temp = temp['data']
       for name in temp:
         print("\n\033[36m歌手名: \033[0m" + name['name'] + "\n\033[36m ID: \033[0m" + "\033[31m" + str(name['id']) + "\033[0m" + "\033[0m", end = "\n")
@@ -181,8 +182,7 @@ if type == "9":
       os.system("python 网易云.py")
     if ty == "2":
       url = llink + "/mv/sublist"
-      r = requests.get(url,cookies=cookies)
-      temp = json.loads(r.text)
+      req(url)
       temp = temp['data']
       for title in temp:
         print("\033[36mMV名称: \033[0m" + title['title'] + "\n\033[36m MV作者: \033[0m" + title['creator'][0]['userName'] + "\n\033[36m作者ID: \033[0m\033[31m" + str(title['creator'][0]['userId']) + "\n\033[0m\033[36m" + "MVID: \033[0m\033[31m" + str(title['vid']),end = "\n\n")
@@ -192,8 +192,7 @@ if type == "9":
 if type == "8":
 
   url = llink + "/daily_signin"
-  r = requests.get(url,cookies=cookies)
-  temp = json.loads(r.text)
+  req(url)
   if temp['code'] == 200:
     print("\033[31m\n每日签到成功！૧(●´৺`●)૭\033[0m")
   if temp['code'] == -2:
@@ -214,8 +213,7 @@ if type == "0":
   print("\033[31m\n请复制下面这段链接并粘贴到Alook浏览器，然后通过它自带的工具箱功能获取此链接的cookie，并保存到cookie.txt文件中(或者通过F12抓取cookie)\n\033[0m")
   print(url)
   print("\033[36m\n如果不想下载的话，可以按照下面的方法:\033[0m")
-  r = requests.get(url)
-  temp = json.loads(r.text)
+  req(url)
   temp = str(temp['cookie'])
   print("\n\033[31m这是cookie(未删减)，请复制并打开cookie.txt:\033[m\n")
   print(temp)
@@ -227,9 +225,7 @@ if type == "1":
   id = input("\033[36m请输入歌曲ID:\033[0m")
   print("\033[31m直链来啦！\033[0m\n")
   url = llink + "/song/url?id=" + id
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   urll = llink + "/song/detail?ids=" +id
   rr = requests.get(urll,cookies=cookies)
   tem = json.loads(rr.text)
@@ -265,15 +261,16 @@ if type == "1":
     name = name + " - " + ar + ".mp3"
     name = ''.join(name.split())
     print("\033[36m\n下载进度:\033[0m")
+    realname = "./music/" + name
     fn = wget.download(temp['data'][0]['url'],name)
-    print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + fn)
+    mv = "mv " + name + " music"
+    os.system(mv)
+    print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + realname)
     print("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
       url = llink + "/like?id=" + id
-      r = requests.post(url,cookies=cookies)
-      text = r.text
-      temp = json.loads(text)
+      req(url)
       if temp['code'] == 200:
         print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
       else:
@@ -291,18 +288,19 @@ if type == "1":
       tem = json.loads(rr.text)
       name = tem['songs'][0]['name']
       ar = tem['songs'][0]['ar'][0]['name']
-      name = name + " - " + ar + ".mp3"
+      name = "./music/" + name + " - " + ar + ".mp3"
       name = ''.join(name.split())
       print("\033[36m\n下载进度:\033[0m")
+      realname = "./music/" + name
       fn = wget.download(temp['data'][0]['url'],name)
-      print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
+      mv = "mv " + name + " music"
+      os.system(mv)
+      print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + realname)
     print("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
       url = llink + "/like?id=" + id
-      r = requests.post(url,cookies=cookies)
-      text = r.text
-      temp = json.loads(text)
+      req(url)
       if temp['code'] == 200:
         print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
       else:
@@ -317,18 +315,19 @@ if type == "1":
     name = name + " - " + ar + ".mp3"
     name = ''.join(name.split())
     print("\033[36m\n下载进度:\033[0m")
+    realname = "./music/" + name
     fn = wget.download(temp['data'][0]['url'],name)
-    print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + fn)
-    action = "nohup play " + fn + "&"
+    mv = "mv " + name + " music"
+    os.system(mv)
+    print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + realname)
+    action = "nohup play music/" + name + "&"
     os.system(action)
     time.sleep(2)
     print("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
       url = llink + "/like?id=" + id
-      r = requests.post(url,cookies=cookies)
-      text = r.text
-      temp = json.loads(text)
+      req(url)
       if temp['code'] == 200:
         print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
       else:
@@ -339,9 +338,7 @@ elif type == "2":
   id = input("\033[36m请输入歌曲ID:\033[0m")
   print("\033[31m歌词来啦！\033[0m\n")
   url = llink + "/lyric?id=" + id
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   print(temp['lrc']['lyric'])
 
 elif type == "3":
@@ -353,9 +350,7 @@ elif type == "3":
   limit = time + 1
   limit = str(limit)
   url = llink + "/search?keywords=" + word + "&limit=" + limit
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
 
   time = int(time)
   try:
@@ -378,9 +373,7 @@ elif type == "4":
 
   id = input("\033[36m请输入MV的ID:\033[0m")
   url = llink + "/mv/url?id=" + id
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   print("\033[31mMV来啦！\033[0m")
   print(temp['data']['url'])
 
@@ -395,9 +388,7 @@ elif type == "5":
   limit = str(limit)
   print("\033[31m热评来啦！\033[0m\n")
   url = llink + "/comment/hot?id=" + id + "&type=" + type + "&limit=" + limit
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   try:
     time = int(time)
     while 0 <= time:
@@ -411,9 +402,7 @@ elif type == "5":
       print("\033[36m一次性得不到这么多评论啦(或者这首歌评论很少)վ'ᴗ' ի")
 elif type == "6":
   url = llink + "/search/hot/"
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   print("\033[31m热搜来啦！\033[0m")
   time = 9
   while 0 <= time:
@@ -430,9 +419,7 @@ if type == "7":
 
   id = input("\033[36m请输入歌手ID:\033[0m")
   url = llink + "/artists?id=" + id
-  r = requests.post(url,cookies=cookies)
-  text = r.text
-  temp = json.loads(text)
+  req(url)
   print("\033[34m—————————\033[0m")
   print(temp['artist']['briefDesc'])
 
@@ -440,5 +427,4 @@ re = input("\033[35m\n输入1以继续获取；0为退出程序(๑ت๑):\033[0
 if re == "1":
   os.system("python 网易云.py")
 if re == "0":
-  print("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
-  os._exit(0)
+  quit()
