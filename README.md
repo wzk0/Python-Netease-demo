@@ -8,6 +8,12 @@
 wget https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E6%98%93%E4%BA%91.py
 ```
 
+或者
+
+```
+git clone https://github.com/wzk0/Python-Netease-demo.git
+```
+
 ## 依赖:
 
 > 需要安装`requests`，`wget`插件
