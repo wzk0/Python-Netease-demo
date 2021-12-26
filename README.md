@@ -1,5 +1,7 @@
 # Python-Netease-demo
 
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=wzk0&theme=tokyonight&repo=Python-Netease-demo)](https://github.com/anuraghazra/github-readme-stats)
+
 > 第一个Python小项目——调用了网易云API以获取多个信息.(虽然项目很菜但是`README`还是要写好的！)
 
 ## 安装(或者可以称为"获取"):
