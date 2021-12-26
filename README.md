@@ -1,6 +1,6 @@
 # Python-Netease-demo
 
-> 第一个Python小项目——调用了网易云API以获取多个信息
+> 第一个Python小项目——调用了网易云API以获取多个信息.(虽然项目很菜但是README.md还是要写好的！)
 
 ## 安装(或者可以称为"获取"):
 
@@ -13,6 +13,8 @@ wget https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E
 ```
 git clone https://github.com/wzk0/Python-Netease-demo.git
 ```
+
+(内存不够删除一下`README.md`和`LICENSE`即可🌚)
 
 ## 依赖:
 
@@ -52,6 +54,8 @@ python 网易云.py
 ## 支持的功能:
 
 ![如图所示](https://raw.githubusercontent.com/wzk0/photo/main/Screenshot_2021-12-11-14-16-05-44.jpg)
+
+以及
 
 * 一键更新功能(输入`update`)
 
