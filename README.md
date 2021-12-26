@@ -18,6 +18,12 @@ pip3 install requests
 pip3 install wget
 ```
 
+或者
+
+```
+pip install -r requirements.txt
+```
+
 > 如果有播放需求，则需要安装`sox`播放器(`在线播放`还需安装wget):
 
 ```
