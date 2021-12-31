@@ -212,6 +212,7 @@ if type == "0":
   url = llink + "/login/cellphone?phone=" + phone +"&password=" + password
   print("\033[31m\n请复制下面这段链接并粘贴到Alook浏览器，然后通过它自带的工具箱功能获取此链接的cookie，并保存到cookie.txt文件中(或者通过F12抓取cookie)\n\033[0m")
   print(url)
+  print("\033[34m\n这是Alook浏览器的蓝奏云下载地址:\nhttps://wangzhuoke.lanzoul.com/itBPEy74rpc 密码：666\n\033[0m")
   print("\033[36m\n如果不想下载的话，可以按照下面的方法:\033[0m")
   req(url)
   temp = str(temp['cookie'])
