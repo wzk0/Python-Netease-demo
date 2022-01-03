@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
 import time
@@ -180,7 +180,7 @@ if type == "9":
       for name in temp:
         print("\n\033[36m歌手名: \033[0m" + name['name'] + "\n\033[36m ID: \033[0m" + "\033[31m" + str(name['id']) + "\033[0m" + "\033[0m", end = "\n")
       print("\n")
-      os.system("python 网易云.py")
+      os.system("python3 网易云.py")
     if ty == "2":
       url = llink + "/mv/sublist"
       req(url)
@@ -188,7 +188,7 @@ if type == "9":
       for title in temp:
         print("\033[36mMV名称: \033[0m" + title['title'] + "\n\033[36m MV作者: \033[0m" + title['creator'][0]['userName'] + "\n\033[36m作者ID: \033[0m\033[31m" + str(title['creator'][0]['userId']) + "\n\033[0m\033[36m" + "MVID: \033[0m\033[31m" + str(title['vid']),end = "\n\n")
       print("\n")
-      os.system("python 网易云.py")
+      os.system("pytho3n 网易云.py")
 
 if type == "8":
 
@@ -252,7 +252,7 @@ if type == "1":
   choooses = input("\033[36m请输入序号:\033[0m")
 
   if choooses == "0":
-    os.system("python 网易云.py")
+    os.system("python3 网易云.py")
 
   if choooses == "1":
     ur = llink + "/song/detail?ids=" +id
@@ -427,6 +427,6 @@ if type == "7":
 
 re = input("\033[35m\n输入1以继续获取；0为退出程序(๑ت๑):\033[0m")
 if re == "1":
-  os.system("python 网易云.py")
+  os.system("python3 网易云.py")
 if re == "0":
   quit()
