@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
+def p(str):
+  print(str)
+
 import time
 import requests
 import json
@@ -22,7 +25,7 @@ if not os.path.exists(filename):
   os.system("touch cookie.txt")
   with open('cookie.txt', 'w') as f:
     f.write("NMTID=xxx; MUSIC_U=xxx; remember_me=true; csrf=xxx")
-  print("\033[31m\n未登陆！已创建临时cookie，保存在cookie.txt中！\033[0m")
+  p("\033[31m\n未登陆！已创建临时cookie，保存在cookie.txt中！\033[0m")
 
 filename = 'music'
 if not os.path.exists(filename):
@@ -40,17 +43,17 @@ def req(url):
   temp = json.loads(r.text)
 
 def quit():
-  print("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
+  p("\033[36mBye*╭︎( ˙º˙)╯︎*\033[0m")
   os._exit(0)
 
-print("\n\n\n\033[34m————————————————————————\033[0m")
-print("\033[36m网易云辅助demo！(´◊ω◊｀)\033[0m")
-print("\033[34m————————————————————————\n\033[0m")
-print("\033[36m由便当手打制作！٩(๑ᵒ̴̶̷͈᷄ᗨᵒ̴̶̷͈᷅)و\033[0m")
-print("\n\033[36m您当前的API服务器为:\033[0m" + llink + "\n如需更换，请\033[31m修改llink的值\033[0m！")
-print("\033[34m-----------------------------------------------\033[0m")
-print("\n\033[32m0)\033[0m \033[36m登陆(输入以查看登陆方法说明)\033[0m\n\n\033[32m1)\033[0m \033[36m获取歌曲\033[0m         \033[32m2)\033[0m \033[36m获取歌词\033[0m\n\n\033[32m3)\033[0m \033[36m搜索\033[0m             \033[32m4)\033[0m \033[36m获取MV\033[0m\n\n\033[32m5)\033[0m \033[36m获取热评\033[0m         \033[32m6)\033[0m \033[36m获取当前热搜\033[0m\n\n\033[32m7)\033[0m \033[36m获取歌手信息\033[0m     \033[32m8)\033[0m \033[36m签到(登陆可用)\n\033[0m\n\033[32m9)\033[0m \033[36m个人中心\033[0m\033[32m         10)\033[0m \033[36m获取日推\033[0m\n\033[32m\n11) \033[0m\033[36m我喜欢\033[0m          \033[32m12) \033[0m\033[36m歌曲详情\033[0m\n\n\033[32m13) \033[0m\033[36m获取歌手热门\033[0m    \033[32m14)\033[0m \033[36m收藏音乐(这是一个动词)\n\033[0m")
-print("\033[34m-----------------------------------------------\033[0m")
+p("\n\n\n\033[34m————————————————————————\033[0m")
+p("\033[36m网易云辅助demo！(´◊ω◊｀)\033[0m")
+p("\033[34m————————————————————————\n\033[0m")
+p("\033[36m由便当手打制作！٩(๑ᵒ̴̶̷͈᷄ᗨᵒ̴̶̷͈᷅)و\033[0m")
+p("\n\033[36m您当前的API服务器为:\033[0m" + llink + "\n如需更换，请\033[31m修改llink的值\033[0m！")
+p("\033[34m-----------------------------------------------\033[0m")
+p("\n\033[32m0)\033[0m \033[36m登陆(输入以查看登陆方法说明)\033[0m\n\n\033[32m1)\033[0m \033[36m获取歌曲\033[0m         \033[32m2)\033[0m \033[36m获取歌词\033[0m\n\n\033[32m3)\033[0m \033[36m搜索\033[0m             \033[32m4)\033[0m \033[36m获取MV\033[0m\n\n\033[32m5)\033[0m \033[36m获取热评\033[0m         \033[32m6)\033[0m \033[36m获取当前热搜\033[0m\n\n\033[32m7)\033[0m \033[36m获取歌手信息\033[0m     \033[32m8)\033[0m \033[36m签到(登陆可用)\n\033[0m\n\033[32m9)\033[0m \033[36m个人中心\033[0m\033[32m         10)\033[0m \033[36m获取日推\033[0m\n\033[32m\n11) \033[0m\033[36m我喜欢\033[0m          \033[32m12) \033[0m\033[36m歌曲详情\033[0m\n\n\033[32m13) \033[0m\033[36m获取歌手热门\033[0m    \033[32m14)\033[0m \033[36m收藏音乐(这是一个动词)\n\033[0m")
+p("\033[34m-----------------------------------------------\033[0m")
 type = input ("\033[36m\n请输入序号:\033[0m")
 
 if type == "update":
@@ -60,16 +63,16 @@ if type == "update":
     f.write(r.text)
   act = "chmod +x 网易云.py"
   os.system(act)
-  print("\033[36m更新完啦！现在你可以通过 \033[0m\033[31m./网易云.py \033[0m\033[36m来重启程序！\033[0m")
+  p("\033[36m更新完啦！现在你可以通过 \033[0m\033[31m./网易云.py \033[0m\033[36m来重启程序！\033[0m")
 
 if type == "14":
   id = input("\033[36m请输入歌曲ID:\033[0m")
   url = llink + "/like?id=" + id
   req(url)
   if temp['code'] == 200:
-    print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
+    p("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
   else:
-    print("\n\033[31m收藏失败了..不然你再试试?")
+    p("\n\033[31m收藏失败了..不然你再试试?")
 
 if type == "quit":
   quit()
@@ -81,8 +84,8 @@ if type == "13":
   req(url)
   temp = temp['songs']
   for name in temp:
-    print("\n歌名: \033[31m" + name['name'] + "\033[0m")
-    print(" \033[34m歌曲ID: \033[0m" + str(name['id']),end="\n\n")
+    p("\n歌名: \033[31m" + name['name'] + "\033[0m")
+    p(" \033[34m歌曲ID: \033[0m" + str(name['id']),end="\n\n")
 
 if type == "12":
   ids = input("\033[36m请输入歌曲ID:\033[0m")
@@ -91,12 +94,12 @@ if type == "12":
   temp = temp['songs'][0]
   ar = temp['ar'][0]
   al =temp['al']
-  print("\n歌曲名: \033[36m" + temp['name'] + "\033[0m")
-  print("\033[31m 歌曲ID: \033[0m" + str(temp['id']))
-  print("歌手名: \033[36m" + ar['name'] + "\033[0m")
-  print("\033[31m 歌手ID: \033[0m" + str(ar['id']))
-  print("所属专辑: \033[36m" + al['name'] + "\033[0m")
-  print("\033[31m 专辑ID: \033[0m " + str(al['id']))
+  p("\n歌曲名: \033[36m" + temp['name'] + "\033[0m")
+  p("\033[31m 歌曲ID: \033[0m" + str(temp['id']))
+  p("歌手名: \033[36m" + ar['name'] + "\033[0m")
+  p("\033[31m 歌手ID: \033[0m" + str(ar['id']))
+  p("所属专辑: \033[36m" + al['name'] + "\033[0m")
+  p("\033[31m 专辑ID: \033[0m " + str(al['id']))
 
 if type == "11":
   do = "/user/account"
@@ -107,7 +110,7 @@ if type == "11":
   rr = requests.get(like,cookies=cookies)
   tem = json.loads(rr.text)
   tem = tem['ids']
-  print("\033[36m接下来的过程比较漫长...如果想终止请输入\033[0m\033[36mCtrl C\n\033[0m")
+  p("\033[36m接下来的过程比较漫长...如果想终止请输入\033[0m\033[36mCtrl C\n\033[0m")
   for te in tem:
     url = llink + "/song/detail?ids=" + str(te)
     req(url)
@@ -115,79 +118,79 @@ if type == "11":
     ar = temp['ar'][0]
     al =temp['al']
     try:
-      print("\n歌曲名: \033[36m" + temp['name'] + "\033[0m")
-      print("\033[31m 歌曲ID: \033[0m" + str(temp['id']))
-      print("歌手名: \033[36m" + ar['name'] + "\033[0m")
-      print("\033[31m 歌手ID: \033[0m" + str(ar['id']))
-      print("所属专辑: \033[36m" + al['name'] + "\033[0m")
-      print("\033[31m 专辑ID: \033[0m " + str(al['id']))
+      p("\n歌曲名: \033[36m" + temp['name'] + "\033[0m")
+      p("\033[31m 歌曲ID: \033[0m" + str(temp['id']))
+      p("歌手名: \033[36m" + ar['name'] + "\033[0m")
+      p("\033[31m 歌手ID: \033[0m" + str(ar['id']))
+      p("所属专辑: \033[36m" + al['name'] + "\033[0m")
+      p("\033[31m 专辑ID: \033[0m " + str(al['id']))
     except KeyboardInterrupt:
-      print("\n\033[31m已停止！\033[0m")
+      p("\n\033[31m已停止！\033[0m")
 
 if type == "10":
   t = time.localtime()
-  print("\n\033[31m" + str(t.tm_year) + "年" +  str(t.tm_mon) + "月" + str(t.tm_mday) + "日" + "的日推来啦！\033[0m\n")
+  p("\n\033[31m" + str(t.tm_year) + "年" +  str(t.tm_mon) + "月" + str(t.tm_mday) + "日" + "的日推来啦！\033[0m\n")
   url = llink + "/recommend/songs"
   req(url)
   for name in temp['data']['dailySongs']:
-    print("歌名: " + "\033[31m" + name['name'])
-    print(" \033[36m歌曲ID: \033[0m" + str(name['id']))
-    print("歌手名: " + "\033[31m" + name['ar'][0]['name'])
-    print(" \033[36m歌手ID: \033[0m" + str(name['ar'][0]['id']),end="\n\n")
+    p("歌名: " + "\033[31m" + name['name'])
+    p(" \033[36m歌曲ID: \033[0m" + str(name['id']))
+    p("歌手名: " + "\033[31m" + name['ar'][0]['name'])
+    p(" \033[36m歌手ID: \033[0m" + str(name['ar'][0]['id']),end="\n\n")
 
 if type == "9":
-  print("\033[36m\n1) 账户信息  2) 收藏信息\033[0m")
+  p("\033[36m\n1) 账户信息  2) 收藏信息\033[0m")
   do = input("\033[36m\n请输入序号:\033[0m")
   if do == "1":
     do = "/user/account"
     url = llink + do
     req(url)
-    print("\033[31m\n你好啊！\033[0m" + str(temp['profile']['nickname']) + "\033[31m (⁎⁍̴̛͂▿⁍̴̛͂⁎)*✲ﾟ*\033[0m")
-    print("\033[34m—————————————————\033[0m")
-    print("\033[36m我的ID: \033[0m" + str(temp['account']['id']))
-    print("\033[34m—————————————————\033[0m")
-    print("\033[36m我的头像:\033[0m\n" + str(temp['profile']['avatarUrl']))
-    print("\033[34m—————————————————\033[0m")
-    print("\033[36m我的背景:\033[0m\n" + str(temp['profile']['backgroundUrl']))
-    print("\033[34m—————————————————\033[0m")
-    print("\033[36m我的个人简介:\033[0m\n" + str(temp['profile']['signature']))
-    print("\033[34m—————————————————\033[0m\n")
+    p("\033[31m\n你好啊！\033[0m" + str(temp['profile']['nickname']) + "\033[31m (⁎⁍̴̛͂▿⁍̴̛͂⁎)*✲ﾟ*\033[0m")
+    p("\033[34m—————————————————\033[0m")
+    p("\033[36m我的ID: \033[0m" + str(temp['account']['id']))
+    p("\033[34m—————————————————\033[0m")
+    p("\033[36m我的头像:\033[0m\n" + str(temp['profile']['avatarUrl']))
+    p("\033[34m—————————————————\033[0m")
+    p("\033[36m我的背景:\033[0m\n" + str(temp['profile']['backgroundUrl']))
+    p("\033[34m—————————————————\033[0m")
+    p("\033[36m我的个人简介:\033[0m\n" + str(temp['profile']['signature']))
+    p("\033[34m—————————————————\033[0m\n")
     vip = str(temp['account']['vipType'])
     if vip == "0":
-      print("\033[36m诶，你不是会员诶 վ'ᴗ' ի")
+      p("\033[36m诶，你不是会员诶 վ'ᴗ' ի")
 
   if do == "2":
     do = "/user/subcount"
     url = llink + do
     req(url)
-    print("\n\033[34m—————————————————\033[0m")
-    print("收藏的电台数:" + str(temp['djRadioCount']))
-    print("\033[34m—————————————————\033[0m")
-    print("收藏的MV数:" + str(temp['mvCount']))
-    print("\033[34m—————————————————\033[0m")
-    print("收藏的歌手数:" + str(temp['artistCount']))
-    print("\033[34m—————————————————\033[0m")
-    print("创建的歌单数:" + str(temp['createdPlaylistCount']))
-    print("\033[34m—————————————————\033[0m")
-    print("收藏的歌单数:" + str(temp['subPlaylistCount']))
-    print("\033[34m—————————————————\033[0m")
-    print("\n\033[36m0) 继续      1) 查看收藏歌手详情\n\n2) 查看收藏MV详情\n\033[0m")
+    p("\n\033[34m—————————————————\033[0m")
+    p("收藏的电台数:" + str(temp['djRadioCount']))
+    p("\033[34m—————————————————\033[0m")
+    p("收藏的MV数:" + str(temp['mvCount']))
+    p("\033[34m—————————————————\033[0m")
+    p("收藏的歌手数:" + str(temp['artistCount']))
+    p("\033[34m—————————————————\033[0m")
+    p("创建的歌单数:" + str(temp['createdPlaylistCount']))
+    p("\033[34m—————————————————\033[0m")
+    p("收藏的歌单数:" + str(temp['subPlaylistCount']))
+    p("\033[34m—————————————————\033[0m")
+    p("\n\033[36m0) 继续      1) 查看收藏歌手详情\n\n2) 查看收藏MV详情\n\033[0m")
     ty = input("\033[36m请输入序号:\033[0m")
     if ty == "1":
       url = llink + "/artist/sublist"
       req(url)
       temp = temp['data']
       for name in temp:
-        print("\n\033[36m歌手名: \033[0m" + name['name'] + "\n\033[36m ID: \033[0m" + "\033[31m" + str(name['id']) + "\033[0m" + "\033[0m", end = "\n")
-      print("\n")
+        p("\n\033[36m歌手名: \033[0m" + name['name'] + "\n\033[36m ID: \033[0m" + "\033[31m" + str(name['id']) + "\033[0m" + "\033[0m", end = "\n")
+      p("\n")
       os.system("python3 网易云.py")
     if ty == "2":
       url = llink + "/mv/sublist"
       req(url)
       temp = temp['data']
       for title in temp:
-        print("\033[36mMV名称: \033[0m" + title['title'] + "\n\033[36m MV作者: \033[0m" + title['creator'][0]['userName'] + "\n\033[36m作者ID: \033[0m\033[31m" + str(title['creator'][0]['userId']) + "\n\033[0m\033[36m" + "MVID: \033[0m\033[31m" + str(title['vid']),end = "\n\n")
-      print("\n")
+        p("\033[36mMV名称: \033[0m" + title['title'] + "\n\033[36m MV作者: \033[0m" + title['creator'][0]['userName'] + "\n\033[36m作者ID: \033[0m\033[31m" + str(title['creator'][0]['userId']) + "\n\033[0m\033[36m" + "MVID: \033[0m\033[31m" + str(title['vid']),end = "\n\n")
+      p("\n")
       os.system("pytho3n 网易云.py")
 
 if type == "8":
@@ -195,37 +198,37 @@ if type == "8":
   url = llink + "/daily_signin"
   req(url)
   if temp['code'] == 200:
-    print("\033[31m\n每日签到成功！૧(●´৺`●)૭\033[0m")
+    p("\033[31m\n每日签到成功！૧(●´৺`●)૭\033[0m")
   if temp['code'] == -2:
-    print("\033[31m\n你已经签到过啦（ '▿ ' ）\033[0m")
+    p("\033[31m\n你已经签到过啦（ '▿ ' ）\033[0m")
   if temp['code'] == 301:
-    print("\033[31m\n没登陆你签到个啥。。\033[0m")
+    p("\033[31m\n没登陆你签到个啥。。\033[0m")
   urll = llink + "/yunbei/sign"
   rr = requests.get(urll,cookies=cookies)
   tem = json.loads(rr.text)
   if tem['code'] == 200:
-    print("\033[31m\n云贝签到成功！૧(●´৺`●)૭\033[0m")
+    p("\033[31m\n云贝签到成功！૧(●´৺`●)૭\033[0m")
 
 if type == "0":
 
   phone = input("\033[36m请输入手机号码:\033[0m")
   password = input("\033[36m请输入密码:\033[0m")
   url = llink + "/login/cellphone?phone=" + phone +"&password=" + password
-  print("\033[31m\n请复制下面这段链接并粘贴到Alook浏览器，然后通过它自带的工具箱功能获取此链接的cookie，并保存到cookie.txt文件中(或者通过F12抓取cookie)\n\033[0m")
-  print(url)
-  print("\033[34m\n这是Alook浏览器的蓝奏云下载地址:\nhttps://wangzhuoke.lanzoul.com/itBPEy74rpc 密码：666\n\033[0m")
-  print("\033[36m\n如果不想下载的话，可以按照下面的方法:\033[0m")
+  p("\033[31m\n请复制下面这段链接并粘贴到Alook浏览器，然后通过它自带的工具箱功能获取此链接的cookie，并保存到cookie.txt文件中(或者通过F12抓取cookie)\n\033[0m")
+  p(url)
+  p("\033[34m\n这是Alook浏览器的蓝奏云下载地址:\nhttps://wangzhuoke.lanzoul.com/itBPEy74rpc 密码：666\n\033[0m")
+  p("\033[36m\n如果不想下载的话，可以按照下面的方法:\033[0m")
   req(url)
   temp = str(temp['cookie'])
-  print("\n\033[31m这是cookie(未删减)，请复制并打开cookie.txt:\033[m\n")
-  print(temp)
-  print("\n\033[36m然后将其删减修改为这种格式:(是我太菜了)\n\033[m")
-  print("\033[31mNMTID=xxx; MUSIC_U=xxx; remember_me=true; csrf=xxx \033[0m")
+  p("\n\033[31m这是cookie(未删减)，请复制并打开cookie.txt:\033[m\n")
+  p(temp)
+  p("\n\033[36m然后将其删减修改为这种格式:(是我太菜了)\n\033[m")
+  p("\033[31mNMTID=xxx; MUSIC_U=xxx; remember_me=true; csrf=xxx \033[0m")
 
 if type == "1":
 
   id = input("\033[36m请输入歌曲ID:\033[0m")
-  print("\033[31m直链来啦！\033[0m\n")
+  p("\033[31m直链来啦！\033[0m\n")
   url = llink + "/song/url?id=" + id
   req(url)
   urll = llink + "/song/detail?ids=" +id
@@ -234,21 +237,21 @@ if type == "1":
   tem = tem['songs'][0]
   ar = tem['ar'][0]
   al =tem['al']
-  print("\033[36m关于这首歌的信息:\n\033[0m\n歌曲名: \033[36m" + tem['name'] + "\033[0m")
-  print("\033[31m 歌曲ID: \033[0m" + str(tem['id']))
-  print("歌手名: \033[36m" + ar['name'] + "\033[0m")
-  print("\033[31m 歌手ID: \033[0m" + str(ar['id']))
-  print("所属专辑: \033[36m" + al['name'] + "\033[0m")
-  print("\033[31m 专辑ID: \033[0m " + str(al['id']))
-  print("\033[34m—————————————————\033[0m")
-  print("\033[36m高品质临时链接:\033[0m")
-  print(temp['data'][0]['url'])
-  print("\033[34m—————————————————\033[0m")
-  print("\033[36m永久直链:\033[0m")
-  print("https://music.163.com/song/media/outer/url?id=" + id)
-  print("\033[34m—————————————————\033[0m\n")
-  print("\033[36m0) 继续     1) 下载 \n\n2) 在线听   3) 下载并播放\n")
-  print("\033[34m—————————————————\033[0m\n")
+  p("\033[36m关于这首歌的信息:\n\033[0m\n歌曲名: \033[36m" + tem['name'] + "\033[0m")
+  p("\033[31m 歌曲ID: \033[0m" + str(tem['id']))
+  p("歌手名: \033[36m" + ar['name'] + "\033[0m")
+  p("\033[31m 歌手ID: \033[0m" + str(ar['id']))
+  p("所属专辑: \033[36m" + al['name'] + "\033[0m")
+  p("\033[31m 专辑ID: \033[0m " + str(al['id']))
+  p("\033[34m—————————————————\033[0m")
+  p("\033[36m高品质临时链接:\033[0m")
+  p(temp['data'][0]['url'])
+  p("\033[34m—————————————————\033[0m")
+  p("\033[36m永久直链:\033[0m")
+  p("https://music.163.com/song/media/outer/url?id=" + id)
+  p("\033[34m—————————————————\033[0m\n")
+  p("\033[36m0) 继续     1) 下载 \n\n2) 在线听   3) 下载并播放\n")
+  p("\033[34m—————————————————\033[0m\n")
   choooses = input("\033[36m请输入序号:\033[0m")
 
   if choooses == "0":
@@ -262,27 +265,27 @@ if type == "1":
     ar = tem['songs'][0]['ar'][0]['name']
     name = name + " - " + ar + ".mp3"
     name = ''.join(name.split())
-    print("\033[36m\n下载进度:\033[0m")
+    p("\033[36m\n下载进度:\033[0m")
     realname = "./music/" + name
     fn = wget.download(temp['data'][0]['url'],name)
     mv = "mv " + name + " music"
     os.system(mv)
-    print("\n\n\033[36m歌曲已下载！名称为 \033[0m" + realname)
-    print("\n\033[36m是/否收藏?\033[0m")
+    p("\n\n\033[36m歌曲已下载！名称为 \033[0m" + realname)
+    p("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
       url = llink + "/like?id=" + id
       req(url)
       if temp['code'] == 200:
-        print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
+        p("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
       else:
-        print("\n\033[31m收藏失败︎了..不然你再试试?")
+        p("\n\033[31m收藏失败︎了..不然你再试试?")
 
   if choooses == "2":
     action = "nohup play " + temp['data'][0]['url'] + "&"
     os.system(action)
     time.sleep(2)
-    print("\n\033[36m是/否下载?\033[0m")
+    p("\n\033[36m是/否下载?\033[0m")
     download = input("\033[36my/n:\033[0m")
     if download == "y":
       ur = llink + "/song/detail?ids=" +id
@@ -292,21 +295,21 @@ if type == "1":
       ar = tem['songs'][0]['ar'][0]['name']
       name = "./music/" + name + " - " + ar + ".mp3"
       name = ''.join(name.split())
-      print("\033[36m\n下载进度:\033[0m")
+      p("\033[36m\n下载进度:\033[0m")
       realname = "./music/" + name
       fn = wget.download(temp['data'][0]['url'],name)
       mv = "mv " + name + " music"
       os.system(mv)
-      print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + realname)
-    print("\n\033[36m是/否收藏?\033[0m")
+      p("\n\n\033[36m歌曲已下载！名称为: \033[0m" + realname)
+    p("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
       url = llink + "/like?id=" + id
       req(url)
       if temp['code'] == 200:
-        print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
+        p("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
       else:
-        print("\n\033[31m收藏失败了..不然你再试试?")
+        p("\n\033[31m收藏失败了..不然你再试试?")
 
   if choooses == "3":
     ur = llink + "/song/detail?ids=" +id
@@ -316,38 +319,38 @@ if type == "1":
     ar = tem['songs'][0]['ar'][0]['name']
     name = name + " - " + ar + ".mp3"
     name = ''.join(name.split())
-    print("\033[36m\n下载进度:\033[0m")
+    p("\033[36m\n下载进度:\033[0m")
     realname = "./music/" + name
     fn = wget.download(temp['data'][0]['url'],name)
     mv = "mv " + name + " music"
     os.system(mv)
-    print("\n\n\033[36m歌曲已下载！名称为: \033[0m" + realname)
+    p("\n\n\033[36m歌曲已下载！名称为: \033[0m" + realname)
     action = "nohup play music/" + name + "&"
     os.system(action)
     time.sleep(2)
-    print("\n\033[36m是/否收藏?\033[0m")
+    p("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
       url = llink + "/like?id=" + id
       req(url)
       if temp['code'] == 200:
-        print("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
+        p("\n\033[31m收藏成功啦！૧(●´৺`●)૭")
       else:
-        print("\n\033[31m收藏失败了..不然你再试试?")
+        p("\n\033[31m收藏失败了..不然你再试试?")
 
 elif type == "2":
 
   id = input("\033[36m请输入歌曲ID:\033[0m")
-  print("\033[31m歌词来啦！\033[0m\n")
+  p("\033[31m歌词来啦！\033[0m\n")
   url = llink + "/lyric?id=" + id
   req(url)
-  print(temp['lrc']['lyric'])
+  p(temp['lrc']['lyric'])
 
 elif type == "3":
 
   word = input("\033[36m请输入关键词:\033[0m")
   time = input("\033[36m取出数量:\033[0m")
-  print("\033[31m结果来啦！多帮你查了一首噢(๑ت๑)\033[0m\n")
+  p("\033[31m结果来啦！多帮你查了一首噢(๑ت๑)\033[0m\n")
   time = int(time)
   limit = time + 1
   limit = str(limit)
@@ -361,59 +364,59 @@ elif type == "3":
       t = time + 1
       t = str(t)
       time = int(time)
-      print("歌曲名称: \033[31m" + str(temp['result']['songs'][time]['name'])+ "\033[0m")
-      print("\033[34m  歌曲ID: \033[0m" + str(temp['result']['songs'][time]['id']))
-      print("歌手: \033[31m" + str(temp['result']['songs'][time]['artists'][0]['name']) + "\033[0m")
-      print("  \033[34m歌手ID: \033[0m" + str(temp['result']['songs'][time]['artists'][0]['id']))
-      print("专辑名称: \033[31m" + str(temp['result']['songs'][time]['album']['name']) + "\033[0m")
-      print("  \033[34m专辑ID: \033[0m" + str(temp['result']['songs'][time]['album']['id']) + "\n")
+      p("歌曲名称: \033[31m" + str(temp['result']['songs'][time]['name'])+ "\033[0m")
+      p("\033[34m  歌曲ID: \033[0m" + str(temp['result']['songs'][time]['id']))
+      p("歌手: \033[31m" + str(temp['result']['songs'][time]['artists'][0]['name']) + "\033[0m")
+      p("  \033[34m歌手ID: \033[0m" + str(temp['result']['songs'][time]['artists'][0]['id']))
+      p("专辑名称: \033[31m" + str(temp['result']['songs'][time]['album']['name']) + "\033[0m")
+      p("  \033[34m专辑ID: \033[0m" + str(temp['result']['songs'][time]['album']['id']) + "\n")
       time -= 1
   except IndexError and KeyError:
-    print("\033[36m一次性获取太多啦！(或者这首歌没有那么多版本)\033[0m")
+    p("\033[36m一次性获取太多啦！(或者这首歌没有那么多版本)\033[0m")
 
 elif type == "4":
 
   id = input("\033[36m请输入MV的ID:\033[0m")
   url = llink + "/mv/url?id=" + id
   req(url)
-  print("\033[31mMV来啦！\033[0m")
-  print(temp['data']['url'])
+  p("\033[31mMV来啦！\033[0m")
+  p(temp['data']['url'])
 
 elif type == "5":
 
   id = input("\033[36m请输入资源ID:\033[0m")
-  print("\033[36m\n0: 歌曲，1: mv，2: 歌单，3: 专辑，4: 电台，5: 视频\033[0m")
+  p("\033[36m\n0: 歌曲，1: mv，2: 歌单，3: 专辑，4: 电台，5: 视频\033[0m")
   type = input("\033[36m请输入资源类型的序号:\033[0m")
   time = input("\033[36m取出数量:\033[0m")
   time = int(time)
   limit = time + 1
   limit = str(limit)
-  print("\033[31m热评来啦！\033[0m\n")
+  p("\033[31m热评来啦！\033[0m\n")
   url = llink + "/comment/hot?id=" + id + "&type=" + type + "&limit=" + limit
   req(url)
   try:
     time = int(time)
     while 0 <= time:
       time = int(time)
-      print("\033[37;45m" + str(temp['hotComments'][time]['user']['nickname']) + "\033[0m" + "\033[36m 的热评:\033[0m")
-      print("\033[30;47m" + temp['hotComments'][time]['content'] + "\033[0m")
-      print("\033[31m点赞数: \033[0m" + str(temp['hotComments'][time]['likedCount']) + "\n")
+      p("\033[37;45m" + str(temp['hotComments'][time]['user']['nickname']) + "\033[0m" + "\033[36m 的热评:\033[0m")
+      p("\033[30;47m" + temp['hotComments'][time]['content'] + "\033[0m")
+      p("\033[31m点赞数: \033[0m" + str(temp['hotComments'][time]['likedCount']) + "\n")
       time = int(time)
       time -= 1
   except IndexError:
-      print("\033[36m一次性得不到这么多评论啦(或者这首歌评论很少)վ'ᴗ' ի")
+      p("\033[36m一次性得不到这么多评论啦(或者这首歌评论很少)վ'ᴗ' ի")
 elif type == "6":
   url = llink + "/search/hot/"
   req(url)
-  print("\033[31m热搜来啦！\033[0m")
+  p("\033[31m热搜来啦！\033[0m")
   time = 9
   while 0 <= time:
-    print("\033[34m———————————\033[0m")
+    p("\033[34m———————————\033[0m")
     time = int(time)
     t = time + 1
     t = str(t)
     time = int(time)
-    print("\033[36m第\033[0m" + t + "\033[36m名: \033[0m" + str(temp['result']['hots'][time]['first']))
+    p("\033[36m第\033[0m" + t + "\033[36m名: \033[0m" + str(temp['result']['hots'][time]['first']))
     time = int(time)
     time -= 1
 
@@ -422,8 +425,8 @@ if type == "7":
   id = input("\033[36m请输入歌手ID:\033[0m")
   url = llink + "/artists?id=" + id
   req(url)
-  print("\033[34m—————————\033[0m")
-  print(temp['artist']['briefDesc'])
+  p("\033[34m—————————\033[0m")
+  p(temp['artist']['briefDesc'])
 
 re = input("\033[35m\n输入1以继续获取；0为退出程序(๑ت๑):\033[0m")
 if re == "1":
