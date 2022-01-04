@@ -266,11 +266,11 @@ if type == "1":
     name = name + " - " + ar + ".mp3"
     name = ''.join(name.split())
     p("\033[36m\n下载进度:\033[0m")
-    realname = "./music/" + name
-    fn = wget.download(temp['data'][0]['url'],name)
-    mv = "mv " + name + " music"
+    realname = name
+    fn = wget.download(temp['data'][0]['url'],realname)
+    mv = "mv " + realname + " music"
     os.system(mv)
-    p("\n\n\033[36m歌曲已下载！名称为 \033[0m" + realname)
+    p("\n\n\033[36m歌曲已下载！名称为 \033[0m./music/" + realname)
     p("\n\033[36m是/否收藏?\033[0m")
     like = input("\033[36my/n:\033[0m")
     if like == "y":
@@ -293,7 +293,7 @@ if type == "1":
       tem = json.loads(rr.text)
       name = tem['songs'][0]['name']
       ar = tem['songs'][0]['ar'][0]['name']
-      name = "./music/" + name + " - " + ar + ".mp3"
+      name = name + " - " + ar + ".mp3"
       name = ''.join(name.split())
       p("\033[36m\n下载进度:\033[0m")
       realname = "./music/" + name
