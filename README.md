@@ -46,11 +46,33 @@ pkg install sox
 apt install sox
 ```
 
+综上所述，你可以执行以下两种命令之一来安装此程序的完整版:
+
+1. 
+
+```
+apt upgrade && apt update
+apt install wget python sox -y
+wget https://raw.githubusercontent.com/wzk0/Python-Netease-demo/main/%E7%BD%91%E6%98%93%E4%BA%91.py
+pip3 install requests wget
+python3 网易云.py
+```
+
+2. 
+
+```
+apt upgrade && apt update
+apt install wget python git sox -y
+git clone https://github.com/wzk0/Python-Netease-demo.git
+pip3 install -r requirements.txt
+python3 网易云.py
+```
+
 ## 启动：
 
 
 ```python
-python 网易云.py
+python3 网易云.py
 ```
 
 ## 支持的功能:
@@ -60,6 +82,13 @@ python 网易云.py
 以及
 
 * 一键更新功能(输入`update`)
+
+## 流程:
+
+1. 进入后，会先检测是否有`cookie.txt`(登陆凭证)和`music`文件夹(音频储存)，如果没有，会创建并在`cookie.txt`中写入一个`cookie模板`；
+2. 读取`cookie.txt`并`json编码`一下，保存为`cookies`变量
+3. 根据不同的序号进行不同的反馈，请求时携带`cookies`；
+4. 反馈后自动重启，用了很不靠谱的`os.system("python3 网易云.py")`；
 
 ## 参考:
 
