@@ -354,7 +354,7 @@ elif type == "3":
   time = int(time)
   limit = time + 1
   limit = str(limit)
-  url = llink + "/search?keywords=" + word + "&limit=" + limit
+  url = llink + "/search?keywords=" + word + "&limit=" + limit + "&type=1"
   req(url)
 
   time = int(time)
