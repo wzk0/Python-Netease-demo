@@ -1,6 +1,6 @@
 # Python-Netease-demo
 
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=wzk0&theme=tokyonight&repo=Python-Netease-demo)](https://github.com/anuraghazra/github-readme-stats)
+**项目已经不再（懒得）更新（重构）了！**
 
 > 第一个Python小项目——调用了网易云API以获取多个信息.(虽然项目很菜但是`README`还是要写好的！)
 
@@ -90,16 +90,6 @@ python3 网易云.py
 3. 根据不同的序号进行不同的反馈，请求时携带`cookies`；
 4. 反馈后自动重启，用了很不靠谱的`os.system("python3 网易云.py")`；
 
-## 参考:
+## 相关:
 
 [Node.js版网易云API](https://github.com/Binaryify/NeteaseCloudMusicApi)
-
-## 声明:
-
-我知道这个项目很辣鸡！还只是个小白！轻喷！谢谢！
-
-以后会努力的！
-
-## 星星
-
-[![Stargazers over time](https://starchart.cc/some6508/all.svg)](https://starchart.cc/some6508/all)
