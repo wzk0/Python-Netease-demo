@@ -163,7 +163,13 @@ def info_limit(uid):
 		name=ele['name']
 		uid=str(ele['id'])
 		ar=ele['ar'][0]['name']
+		name=name.replace(' ','_')
+		name=name.replace('(','_')
+		name=name.replace(')','')
+		ar=ar.replace(' ','_')
+		ar=ar.replace('(','_')
+		ar=ar.replace(')','')
 		if read.music_dltype=='0':
-			return name.replace(' ','_')+'-'+ar.replace(' ','_')
+			return name+'-'+ar
 		else:
-			return ar.replace(' ','_')+'-'+name.replace(' ','_')
+			return ar+'-'+name
