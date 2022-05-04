@@ -2,7 +2,7 @@
 
 > 当然,指的是[Node.js版网易云API](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
-> 这里有两篇自述文件,oldREADME.md里记述的是Version1.0,对应代码只有一个'网易云.py'.已经不再更新它了!
+> 这里有两篇自述文件,oldREADME.md里记述的是Version1.0,对应代码只有一个`网易云.py`.已经不再更新它了!
 
 > 这是一个尚未完工的项目!
 
@@ -23,28 +23,28 @@
 ### 如果你只想快速开始:
 
 clone此仓库:
-'''
+```
 git clone https://github.com/wzk0/Python-Netease-demo
-'''
+```
 
 安装requests模块:
-'''
+```
 pip3 install requests
-'''
+```
 
 随后编辑配置文件:
-'''
+```
 nano src/conf.yaml
-'''
+```
 
 可以使用了!
 
-如果想使用登录相关的功能,请获得自己的网易云cookies并按照'cookies.json'的格式写入其中.
+如果想使用登录相关的功能,请获得自己的网易云cookies并按照`cookies.json`的格式写入其中.
 
 ### 如果你想开发:
 
 项目树状图:
-'''
+```
 .
 ├── main.py	##主程序
 └── src
@@ -54,9 +54,9 @@ nano src/conf.yaml
     ├── __init__.py	##证明文件
     ├── player.py	##播放器及其他
     └── read.py		##读取配置和检查
-'''
+```
 
-Sorry...没有写注释,不过代码很简单,除了requests也没导入其他库!
+Sorry...没有写注释,不过代码很简单,除了requests也没导入其他第三方库!
 
 登录功能暂时没做出来,原因是:
 
