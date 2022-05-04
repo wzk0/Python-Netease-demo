@@ -1,2 +1,52 @@
+##API服务器
 server: http://192.168.1.9:3000/
 ##请务必携带最后的/!
+
+##保存路径
+dl_dir: 'My_Music'
+
+##自动下载音乐
+auto_download: False
+
+##音乐下载命名格式
+##0: 歌名+歌手+后缀;1: 歌手+歌名+后缀
+music_dltype: '1'
+
+##自动下载歌词
+auto_lyric: True
+
+##歌单返回量
+playlist_limit: '10'
+
+##历史评论返回量
+history_limit: '10'
+
+##歌手热门曲返回量
+singersongs_limit: '5'
+
+##歌单歌曲返回量
+songs_limit: '10'
+
+##搜索结果返回量
+search_limit: '2'
+
+##资源评论返回量
+comment_limit: '5'
+
+##收藏专辑返回量
+album_limit: '5'
+
+##歌手专辑返回量
+albumsinger_limit: '5'
+
+##歌手返回量
+singer_limit: '5'
+
+##MV返回量
+mv_limit: '5'
+
+##数字专辑返回量
+da_limit: '5'
+
+##获取日推,歌单时自动将歌曲ID保存至本地
+auto_id: True
