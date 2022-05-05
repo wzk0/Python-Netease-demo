@@ -166,9 +166,11 @@ def info_limit(uid):
 		name=name.replace(' ','_')
 		name=name.replace('(','_')
 		name=name.replace(')','')
+		name=name.replace('\'','')
 		ar=ar.replace(' ','_')
 		ar=ar.replace('(','_')
 		ar=ar.replace(')','')
+		name=name.replace('\'','')
 		if read.music_dltype=='0':
 			return name+'-'+ar
 		else:
