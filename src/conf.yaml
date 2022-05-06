@@ -1,5 +1,5 @@
 ##API服务器
-server: 'http://cloud-music.pl-fe.cn/'
+server: 'http://192.168.1.9:3000/'
 ##请务必携带最后的/!
 
 ##保存路径
