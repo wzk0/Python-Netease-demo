@@ -6,7 +6,7 @@ import sys
 read.check_dir()
 		
 os.system('clear')
-print('Netease for Terminal\n','功能如下:')
+print('Netease for Terminal\n','功能如下:',end='')
 desktop=['登录','个人','歌单','评论','歌手','专辑','MV','收藏','音乐','搜索','日推','签到','播放器']
 read.ls(desktop)
 print('='*12)
@@ -18,15 +18,10 @@ if mode=='0':
 	result=api.login('login/cellphone',phone,pwd)
 	print(result)
 	if os.path.exists('src/cookies.json'):
-		mode=input('\n你似乎已经登录过了...是/否(y/n)刷新cookies:')
-		print('\n')
-		if mode=='y':
-			os.system('rm src/cookies.json && touch src/cookies.json')
-			with open('src/cookies.json','w')as f:
-				f.write(result)
-				sys.exit(1)
-		else:
-			sys.exit(1)
+		os.system('rm src/cookies.json && touch src/cookies.json')
+		with open('src/cookies.json','w')as f:
+			f.write(result)
+		sys.exit(1)
 	else:
 		with open('src/cookies.json','w')as f:
 			f.write(result)
@@ -280,7 +275,7 @@ if mode=='8':
 		result=api.model_id(part,uid)
 		print('\n歌词如下:\n'+result['lrc']['lyric'])
 		if read.auto_lyric==True:
-			api.auto_lyric(result['lrc']['lyric'],uid)
+			api.auto_lyric(api.info_limit(uid),uid)
 		sys.exit(1)
 	if mode=='2':
 		part='simi/song'
@@ -301,7 +296,7 @@ if mode=='9':
 	print('='*12)
 	mode=input('\n请选择模式:')
 	if mode=='1':
-		result=api.hot_search()
+		result=api.model_0('search/hot/detail')
 		for ele in result['data']:
 			print('\n热搜关键词: '+ele['searchWord']+'\n热度: '+str(ele['score']))
 		sys.exit(1)
@@ -368,15 +363,51 @@ if mode=='11':
 		sys.exit(1)
 
 if mode=='12':
-	desktop=['读取歌单','下载歌单内所有音乐','播放本地音乐']
+	desktop=['读取歌单','下载歌单内所有音乐','播放本地音乐','生成本地歌单','播放本地歌单','在线播放歌单']
 	read.ls(desktop)
 	print('='*12)
 	mode=input('\n请选择模式:')
 	if mode=='0':
-		player.read_dir()
-		uid=input('\n请输入要歌单前的ID:')
+		path=read.dl_dir+'/列表/'
+		player.read_dir(path)
+		uid=input('\n请输入要播放的歌单前的序号:')
 		player.read_list(uid)
 	if mode=='1':
-		player.read_dir()
-		uid=input('\n请输入要歌单前的ID:')
+		path=read.dl_dir+'/列表/'
+		player.read_dir(path)
+		uid=input('\n请输入要播放的歌单前的序号:')
 		player.dl_list(uid)
+	if mode=='2':
+		path=read.dl_dir+'/音乐/'
+		player.read_dir(path)
+		uid=input('\n请输入要播放的歌曲前的序号(想要生成歌单请选择功能3):')
+		os.system(player.local_play(uid))
+	if mode=='3':
+		path=read.dl_dir+'/音乐/'
+		player.read_dir(path)
+		thing=input('\n请输入要添加到歌单的歌曲前的序号(以空格分隔开每个序号):')
+		listname=input('\n请为你的歌单输入一个名称:')
+		with open(read.dl_dir+'/本地歌单/'+listname,'w')as f:
+			f.write(thing)
+	if mode=='4':
+		path=read.dl_dir+'/本地歌单/'
+		player.read_dir(path)
+		uid=input('\n请输入要播放的歌单前的序号:')
+		re=player.get_dic(uid,path)
+		with open(path+re,'r')as f:
+			thing=f.read()
+		lis=player.make_list(thing)
+		print('\n你可以随时输入Ctrl C终止播放!\n')
+		for ls in lis:
+			name=read.dl_dir+'/音乐/'+ls
+			os.system('play '+name)
+			print('\n你可以随时输入Ctrl C终止播放!\n')
+	if mode=='5':
+		uid=input('\n请输入网易云歌单ID:')
+		result=api.model_lid('playlist/track/all',uid,read.songs_limit)
+		ids=api.get_online_ids(result['songs'])
+		print('\n你可以随时输入Ctrl C终止播放!\n')
+		for i in ids:
+			result=api.model_id('song/url',i)['data'][0]
+			os.system('play '+result['url'])
+			print('\n你可以随时输入Ctrl C终止播放!\n')
