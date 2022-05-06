@@ -275,7 +275,7 @@ if mode=='8':
 		result=api.model_id(part,uid)
 		print('\n歌词如下:\n'+result['lrc']['lyric'])
 		if read.auto_lyric==True:
-			api.auto_lyric(api.info_limit(uid),uid)
+			api.auto_lyric(result['lrc']['lyric'],api.info_limit(uid))
 		sys.exit(1)
 	if mode=='2':
 		part='simi/song'
