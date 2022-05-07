@@ -10,18 +10,44 @@ cookies=read.cookies
 
 '''
 登录的封装
-不知道为什么不能用...一直返回错误信息
-可能是因为网易云加了登录验证功能
 '''
 def login(part,phone,pwd):
 	params={
-	'cellphone':phone,
+	'phone':phone,
 	'password':pwd
 	}
 	r=requests.get(server+part,params=params)
-	cookies=requests.utils.dict_from_cookiejar(r.cookies)
-	cookies=str(cookies).replace('\'','\"')
-	return r.text
+	true=True
+	false=False
+	null='无'
+	data=r.text
+	data=json.loads(data)
+	print('欢迎!'+data['profile']['nickname']+',登录成功!')
+	c=data['cookie']
+	c=c.split('; ')
+	lis=[]
+	for a in c:
+		if 'MUSIC_U' in a:
+			lis.append(a)
+		if 'NMTID' in a:
+			lis.append(a)
+		if '__csrf' in a:
+			lis.append(a)
+	ls=';;'.join(lis)
+	ls=ls.split(';;')
+	lis=[]
+	for path in ls:
+		if 'Path'not in path:
+			lis.append(path)
+	lis=str(lis).replace('[','')
+	lis=str(lis).replace(']','')
+	lis=str(lis).replace('=','\": \"')
+	lis=str(lis).replace(',',',\n')
+	lis=str(lis).replace(' ','')
+	lis=str(lis).replace('\'','\"')
+	tem="\"__remember_me\": \"true\"\n"
+	result='{\n'+lis+',\n'+tem+'}'
+	return result
 
 '''
 模型0
