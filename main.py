@@ -9,7 +9,7 @@ os.system('clear')
 print('Netease for Terminal\n','功能如下:',end='')
 desktop=['登录','个人','歌单','评论','歌手','专辑','MV','收藏','音乐','搜索','日推','签到','播放器']
 read.ls(desktop)
-print('='*12)
+print(read.icon_ui*read.ui_len)
 mode=input('\n请选择模式:')
 if mode=='0':
 	phone=input('\n请输入网易云账号手机号码:')
@@ -26,7 +26,7 @@ if mode=='0':
 if mode=='1':
 	desktop=['查询用户','账号信息','音乐信息','等级信息']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='0':
 		uid=input('\n请输入用户ID:')
@@ -99,7 +99,7 @@ if mode=='1':
 if mode=='2':
 	desktop=['查询用户歌单','歌单详情','歌单歌曲','相似歌单']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='0':
 		uid=input('\n请输入用户ID:')
@@ -136,7 +136,7 @@ if mode=='2':
 if mode=='3':
 	desktop=['查询用户历史评论','获取评论']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='0':
 		uid=input('\n请输入用户ID:')
@@ -147,7 +147,7 @@ if mode=='3':
 	if mode=='1':
 		desktop=['歌曲','MV','歌单','专辑']
 		read.ls(desktop)
-		print('='*12)
+		print(read.icon_ui*read.ui_len)
 		type_id=input('\n请输入资源类型ID:')
 		uid=input('\n请输入资源ID:')
 		result=api.hot_comment('comment/hot',uid,read.comment_limit,type_id)
@@ -157,7 +157,7 @@ if mode=='3':
 if mode=='4':
 	desktop=['歌手热门歌曲','歌手专辑','歌手MV','歌手信息','相似歌手','热门歌手']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	uid=input('\n请输入歌手ID:')
 	if mode=='0':
@@ -188,7 +188,7 @@ if mode=='4':
 if mode=='5':
 	desktop=['专辑内容','专辑信息','我的数专']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	uid=input('\n请输入专辑ID:')
 	if mode=='0':
@@ -207,7 +207,7 @@ if mode=='5':
 if mode=='6':
 	desktop=['获取MV','MV详情','MV排行','推荐MV']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='2':
 		result=api.model_limit('top/mv',read.mv_limit)
@@ -232,7 +232,7 @@ if mode=='6':
 if mode=='7':
 	desktop=['收藏歌手','收藏专栏','收藏歌单','收藏MV','收藏专辑']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='0':
 		result=api.model_0('artist/sublist')
@@ -255,7 +255,7 @@ if mode=='7':
 if mode=='8':
 	desktop=['获取音乐','获取歌词','相似歌曲','收藏音乐(动词)','高级获取']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	uid=input('\n请输入歌曲ID:')
 	result=api.model_ids('song/detail',uid)
@@ -263,11 +263,14 @@ if mode=='8':
 	api.info_real(result['songs'])
 	if mode=='0':
 		result=api.model_id('song/url',uid)['data'][0]
-		print('\n歌曲ID: '+str(result['id'])+'\n歌曲码率: '+str(result['br'])+'\n大小: '+str(result['size'])+'\nmd5: '+result['md5']+'\n音频直链: \n'+result['url']+'\n音频格式: '+result['type'])
-		if read.auto_download==True:
-			print('\n开始自动下载...')
-			os.system(api.auto_dl(result['url'],api.info_limit(uid),result['type']))
-		sys.exit(1)
+		if result['url']==None:
+			print('下载失败!')
+		else:
+			print('\n歌曲ID: '+str(result['id'])+'\n歌曲码率: '+str(result['br'])+'\n大小: '+str(result['size'])+'\nmd5: '+result['md5']+'\n音频直链: \n'+result['url']+'\n音频格式: '+result['type'])
+			if read.auto_download==True:
+				print('\n开始自动下载...')
+				os.system(api.auto_dl(result['url'],api.info_limit(uid),result['type']))
+			sys.exit(1)
 	if mode=='1':
 		part='lyric'
 		result=api.model_id(part,uid)
@@ -291,7 +294,7 @@ if mode=='8':
 if mode=='9':
 	desktop=['全局搜索','热搜列表']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='1':
 		result=api.model_0('search/hot/detail')
@@ -308,7 +311,7 @@ if mode=='9':
 if mode=='10':
 	desktop=['日推歌单','日推歌曲','可用历史日推','获取历史日推']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='3':
 		date=input('\n请输入日期(格式:2020-06-21):')
@@ -338,7 +341,7 @@ if mode=='10':
 if mode=='11':
 	desktop=['签到','云贝签到','一键全签']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='2':
 		api.model_0('daily_signin')
@@ -363,17 +366,17 @@ if mode=='11':
 if mode=='12':
 	desktop=['读取歌单','下载歌单内所有音乐','播放本地音乐','生成本地歌单','播放本地歌单','在线播放歌单']
 	read.ls(desktop)
-	print('='*12)
+	print(read.icon_ui*read.ui_len)
 	mode=input('\n请选择模式:')
 	if mode=='0':
 		path=read.dl_dir+'/列表/'
 		player.read_dir(path)
-		uid=input('\n请输入要播放的歌单前的序号:')
+		uid=input('\n请输入要读取的歌单前的序号:')
 		player.read_list(uid)
 	if mode=='1':
 		path=read.dl_dir+'/列表/'
 		player.read_dir(path)
-		uid=input('\n请输入要播放的歌单前的序号:')
+		uid=input('\n请输入要下载的歌单前的序号:')
 		player.dl_list(uid)
 	if mode=='2':
 		path=read.dl_dir+'/音乐/'

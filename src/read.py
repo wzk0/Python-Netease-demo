@@ -3,15 +3,6 @@ import json
 import os
 
 '''
-用于美化输出任何列表
-'''
-def ls(lis):
-	print('\n')
-	for ls in lis:
-		print('='*12)
-		print(str(lis.index(ls))+'. '+ls)
-
-'''
 读取配置文件并做传递的准备
 '''
 conf=yaml.load(open('src/conf.yaml'),Loader=yaml.FullLoader)
@@ -32,6 +23,17 @@ dl_dir=conf['dl_dir']
 auto_lyric=conf['auto_lyric']
 music_dltype=conf['music_dltype']
 auto_id=conf['auto_id']
+icon_ui=conf['icon_ui']
+ui_len=conf['ui_len']
+
+'''
+用于美化输出任何列表
+'''
+def ls(lis):
+	print('\n')
+	for ls in lis:
+		print(icon_ui*ui_len)
+		print(str(lis.index(ls))+'. '+ls)
 
 '''
 读取cookies

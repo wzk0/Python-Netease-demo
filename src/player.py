@@ -53,8 +53,11 @@ def dl_list(uid):
 	for i in ids:
 		result=api.model_id('song/url',i)['data'][0]
 		print('\n正在下载 '+api.info_limit(i)+'...')
-		os.system(api.auto_dl(result['url'],api.info_limit(i),result['type']))
-		print(api.info_limit(i)+'下载完成!\n')
+		if result['url']==None:
+			print('下载失败!')
+		else:
+			os.system(api.auto_dl(result['url'],api.info_limit(i),result['type']))
+			print(api.info_limit(i)+'下载完成!\n')
 
 '''
 选择序号对应的单曲
