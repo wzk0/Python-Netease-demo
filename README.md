@@ -25,6 +25,8 @@
 
 你需要一个有`Python`环境的`Linux`终端(各种各样的发行版和Termux都是可以的!)
 
+请确保你的电脑上安装有`python3`,`wget`,`git`.
+
 ### 如果你只想快速开始:
 
 clone此仓库:
@@ -50,12 +52,12 @@ pip3 install Pyyaml
 
 * 要使用`播放器`功能需安装:
 
-`sox`(用于终端播放)和`libsox-fmt-all`(处理音乐头文件)
+`wget`(用于下载),`sox`(用于终端播放)和`libsox-fmt-all`(处理音乐头文件)
 
 安装方法:
 
 ```
-sudo apt install libsox-fmt-all sox -y
+sudo apt install wget libsox-fmt-all sox -y
 ```
 
 (其他发行版请自行更换包管理器)
@@ -68,8 +70,6 @@ nano src/conf.yaml
 ```
 
 可以使用了!
-
-如果想使用登录相关的功能,请获得自己的网易云cookies并按照`cookies.json`的格式写入其中.
 
 ---
 
