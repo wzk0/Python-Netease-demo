@@ -269,7 +269,8 @@ if mode=='8':
 			print('\n歌曲ID: '+str(result['id'])+'\n歌曲码率: '+str(result['br'])+'\n大小: '+str(result['size'])+'\nmd5: '+result['md5']+'\n音频直链: \n'+result['url']+'\n音频格式: '+result['type'])
 			if read.auto_download==True:
 				print('\n开始自动下载...')
-				os.system(api.auto_dl(result['url'],api.info_limit(uid),result['type']))
+				act=api.auto_dl(result['url'],api.info_limit(uid),result['type'])
+				os.system(act)
 			sys.exit(1)
 	if mode=='1':
 		part='lyric'
@@ -381,8 +382,12 @@ if mode=='12':
 	if mode=='2':
 		path=read.dl_dir+'/音乐/'
 		player.read_dir(path)
-		uid=input('\n请输入要播放的歌曲前的序号(想要生成歌单请选择功能3):')
-		os.system(player.local_play(uid))
+		print('\n* 播放全部请输入all\n* 生成歌单请选择功能3')
+		uid=input('\n请输入要播放的歌曲前的序号(或all):')
+		if uid != 'all':
+			os.system(player.local_play(uid))
+		else:
+			os.system('play '+read.dl_dir+'/音乐/*')
 	if mode=='3':
 		path=read.dl_dir+'/音乐/'
 		player.read_dir(path)
