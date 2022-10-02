@@ -1,7 +1,6 @@
 from src import api,read,player
 import os
 import sys
-import json
 
 os.system('clear')
 dsktp=['0. 播放音乐(本地)','1. 播放歌单(本地)','2. 制作歌单(本地)','3. 收藏(本地)','4. 删除(本地)','5. 下载歌单内所有音乐(网易云)','6. 在线播放歌单(网易云)','7. 读取歌单(本地-网易云)','s. 设置','q. 退出']
@@ -23,16 +22,17 @@ if ipt=='0':
 	else:
 		name=api.back_name(api.make_list(ipt))
 		api.play(name,read.player_core)
-		print('\033[1;36m是/否(y/n)把刚刚播放的音乐添加入歌单?\033[0m')
-		chs=input('\033[1;7;36my / n :\033[0m')
-		if chs=='y':
-			print('\n\033[1;36m歌单正在加载中...\n\033[0m')
-			print('\033[1;36m目前已有的歌单:\033[0m\n')
-			api.show_ls(os.listdir(read.list_dir))
-			list_name=input('\033[1;7;36m\n请为这张歌单命名:\033[0m')
-			api.write_into(ipt,list_name)
-			print('\033[1;32m\n完成!\n\033[0m')
-			sys.exit(1)
+		if read.auto_ls:
+			if len(name)>=3:
+				print('\n\033[1;36m歌单正在加载中...\n\033[0m')
+				print('\033[1;36m目前已有的歌单:\033[0m\n')
+				api.show_ls(os.listdir(read.list_dir))
+				list_name=input('\033[1;7;36m\n请为这张歌单命名:\033[0m')
+				api.write_into(ipt,list_name)
+				print('\033[1;32m\n完成!\n\033[0m')
+				sys.exit(1)
+			else:
+				sys.exit(1)
 		else:
 			sys.exit(1)
 

@@ -16,6 +16,11 @@
 * 可调用的封装好的API
 * 详细的代码注释
 * 美观
+* 本地音乐终端播放器支持
+* 终端实时歌词滚动
+* 歌词自动适配与模糊识别
+* 歌词皮肤
+* ...
 
 ---
 
@@ -23,9 +28,9 @@
 
 ![1](https://raw.githubusercontent.com/wzk0/photo/main/202209111451899.png)
 
-![2](https://raw.githubusercontent.com/wzk0/photo/main/202209111452097.png)
+![2](https://ghproxy.com/https://raw.githubusercontent.com/wzk0/photo/main/202210022203257.png)
 
-![3](https://raw.githubusercontent.com/wzk0/photo/main/202209111452200.png)
+![3](https://ghproxy.com/https://raw.githubusercontent.com/wzk0/photo/main/202210022209376.png)
 
 ![4](https://raw.githubusercontent.com/wzk0/photo/main/202209111454696.png)
 
@@ -138,3 +143,6 @@ nano src/conf.yaml
 API功能 - [网易云音乐 Node.js API service](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
 终端播放器功能 - [一个根据文件hash操作的,基于sox或cvlc的终端播放器.](https://github.com/wzk0/terminal-player)
+
+
+终端实时滚动歌词功能 - [通过sleep实现的终端lrc歌词文件解析和实时展示.](https://github.com/wzk0/lrc-timely)

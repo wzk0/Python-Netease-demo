@@ -151,7 +151,7 @@ if mode=='3':
 		type_id=input('\n\033[1;7;36m请输入资源类型ID:\033[0m')
 		uid=input('\n\033[1;7;36m请输入资源ID:\033[0m')
 		result=api.hot_comment('comment/hot',uid,read.comment_limit,type_id)
-		print(result)
+		api.comment_real(result)
 		sys.exit(1)
 
 if mode=='4':
@@ -347,7 +347,7 @@ if mode=='11':
 	if mode=='2':
 		api.model_0('daily_signin')
 		api.model_0('yunbei/sign')
-		print('\n成功!')
+		print('\033[1;32m\n成功!\n\033[0m')
 		sys.exit(1)
 	def choose(mode):
 		if mode=='0':
@@ -357,11 +357,11 @@ if mode=='11':
 	part=choose(mode)
 	result=api.model_0(part)
 	if result['code']==200:
-		print('\n签到成功!')
-		print('\n获得积分:'+str(result['point']))
+		print('\033[1;32m\n签到成功!\033[0m')
+		print('\n\033[1;36m获得积分:\033[1;32m'+str(result['point'])+'\033[0m\033[0m')
 		sys.exit(1)
 	else:
-		print('\n签到失败!请检查账户或网络')
+		print('\n\033[1;31m签到失败!请检查账户或网络\033[0m')
 		sys.exit(1)
 
 if mode=='12':

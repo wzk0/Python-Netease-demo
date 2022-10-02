@@ -3,7 +3,101 @@ import json
 from . import read
 import hashlib
 import os
+import time
+from threading import Thread
+import random
 
+'''
+歌词与音频双线程播放
+'''
+
+def lrc_play(player,lrc_name,lrc_path,music_path):
+	def get_good_name(name):
+		name=name.replace('(','\(')
+		name=name.replace(')','\)')
+		name=name.replace(' ','\ ')
+		return name
+		
+	def find(name,lrc_path,music_path):
+		lrc=os.listdir(lrc_path)
+		music=os.listdir(music_path)
+		ls=[]
+		for l in lrc:
+			if name in l:
+				if name==l.split('.')[0]:
+					print('\n\033[1;36m已找到同名的歌词文件!\033[0m')
+					ls.append(l)
+				else:
+					print('\n\033[1;36m未找到同名的歌词文件,但找到可能相关的歌词文件!名称为: \033[1;32m'+str(l)+'\033[0m\033[1;36m 将使用该歌词文件!\033[0m')
+					ls.append(l)
+		for m in music:
+			mm=m.split('.')[0]
+			if name==mm:
+				ls.append(m)
+		ls.append(len(ls))
+		return ls
+
+	def red(name):
+		with open(name,'r')as f:
+			return list(f.read().split('\n'))
+
+	def get(tm):
+		t=tm.split('.')[0].split(':')
+		if t==['']:
+			pass
+		else:
+			return 60*int(t[0])+int(t[1])
+
+	def begin(name,w):
+		data=red(name)
+		ls=[]
+		for i in data:
+			tm=i.replace('[','').split(']')
+			ls.append(tm)
+		for t in ls:
+			tm=t[0]
+			me=ls.index(t)
+			if me==0:
+				needlose=0
+			else:
+				now=ls[me][0]
+				pre=ls[me-1][0]
+				if now=='':
+					pass
+				else:
+					time.sleep(get(now)-get(pre))
+					if read.rainbow:
+						i=random.randint(30,37)
+						z=random.randint(40,47)
+						print('\033[1;'+str(i)+';'+str(z)+'m'+t[1]+'\033[0m')
+					if read.pure_color!=False:
+						print('\033[1;'+read.pure_color+t[1]+'\033[0m')
+					else:
+						print(t[1])
+
+	def pla(player,file):
+		os.system(player+' '+file)
+
+	result=find(lrc_name,lrc_path,music_path)
+	if result[-1]==0:
+		return False
+	if result[-1]==1:
+		music_name=result[0]
+		print('\n\033[1;36m没有找到歌词!\033[0m')
+		pla(player,music_path+get_good_name(music_name))
+	if result[-1]==2:
+		music_name=result[1]
+		lrc_name=result[0]
+		if player=='cvlc ':
+			player='cvlc --play-and-exit '
+		else:
+			player=player
+		t1=Thread(target=begin,args=(lrc_path+lrc_name,''))
+		t2=Thread(target=pla,args=(player,music_path+get_good_name(music_name)))
+		t1.start()
+		t2.start()
+		t1.join()
+		t2.join()
 '''
 读取配置
 '''
@@ -24,7 +118,7 @@ def login(part,phone,pwd):
 	null='无'
 	data=r.text
 	data=json.loads(data)
-	print('欢迎!'+data['profile']['nickname']+',登录成功!')
+	print('\n\033[1;36m登录成功!欢迎用户\033[0m\033[1;32m '+data['profile']['nickname']+' \033[0m\033[1;36m!\033[0m')
 	c=data['cookie']
 	c=c.split('; ')
 	lis=[]
@@ -212,7 +306,7 @@ def auto_dl(url,name,music_type):
 会调用此函数写入歌词
 '''
 def auto_lyric(text,name):
-	with open(read.dl_dir+'/歌词/'+name+'.txt','w')as f:
+	with open(read.dl_dir+'/歌词/'+name+'.lrc','w')as f:
 		f.write(text)
 
 
@@ -273,6 +367,18 @@ def info_list(lis):
 		listname=input('\n检测到你开启了自动保存列表功能,请输入列表名:')
 		with open(read.dl_dir+'/列表/'+listname,'w')as f:
 			f.write('\n'.join(ud))
+
+'''
+评论的格式化输出
+'''
+def comment_real(lis):
+	for ele in lis['hotComments']:
+		print('\033[1;35;44m'+str(lis['hotComments'].index(ele))+'.\033[0m | \033[0m\033[1;36m'+read.icon_ui*read.ui_len+'\033[0m')
+		print('\033[1;36m点赞数:\033[1;31m'+str(ele['likedCount'])+'\033[0m')
+		print('\033[1;36m内容:\n\033[0m\033[1;48m'+ele['content']+'\033[0m\n')
+		user=ele['user']
+		print('\033[1;36m评论者ID:\033[1;32m'+str(user['userId'])+'\033[0m'+'\n\033[1;36m评论者昵称:\033[1;35m'+user['nickname']+'\033[0m\n'+'\033[1;36m评论者等级:\033[1;32m'+str(user['vipType'])+'\033[0m')
+		print('\033[1;34m'+read.icon_ui*read.ui_len*2+'\033[0m\n')
 
 '''
 专辑的格式化输出
@@ -347,11 +453,14 @@ def back_name(hash_list):
 ##通过列表播放歌曲
 def play(thing,act):
 	if thing=='a':
-		os.system(act+read.music_dir+'*')
+		for name in os.listdir(read.music_dir):
+			n=name.split('.')[0].split('/')[-1]
+			lrc_play(act,n,read.lrc_path,read.music_dir)
 	else:
 		for name in thing:
-			name=read.get_good_name(name)
-			os.system(act+read.music_dir+name)
+			n=name.split('.')
+			print(n[0])
+			lrc_play(act,n[0],read.lrc_path,read.music_dir)
 
 ##写入hash到文件
 def write_into(ipt,list_name):
@@ -363,8 +472,8 @@ def write_into(ipt,list_name):
 def play_hash(hsh):
 	songs_list=dict(zip(list(get_dirhash().values()),list(get_dirhash().keys())))
 	name=songs_list[hsh]
-	name=read.get_good_name(name)
-	os.system(read.player_core+read.music_dir+name)
+	n=name.split('.')
+	lrc_play(read.player_core,n[0],read.lrc_path,read.music_dir)
 
 ##通过输入序号返回歌单的hash列表
 def back_hash(ipt):

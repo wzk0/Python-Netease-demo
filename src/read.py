@@ -31,8 +31,12 @@ music_dltype=conf['music_dltype']
 auto_id=conf['auto_id']
 icon_ui=conf['icon_ui']
 ui_len=conf['ui_len']
+rainbow=conf['rainbow']
+auto_ls=conf['auto_ls']
+pure_color=conf['pure_color']
 
 music_dir=dl_dir+'/音乐/'
+lrc_path=dl_dir+'/歌词/'
 list_dir=dl_dir+'/本地歌单/'
 player_core=conf['player_core']
 music_dir=get_good_name(music_dir)
