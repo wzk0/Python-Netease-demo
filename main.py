@@ -258,9 +258,9 @@ if mode=='8':
 	print('\033[1;34m'+read.icon_ui*read.ui_len+'\033[0m\n')
 	mode=input('\n\033[1;7;36m请选择模式:\033[0m')
 	uid=input('\n\033[1;7;36m请输入歌曲ID:\033[0m')
-	result=api.model_ids('song/detail',uid)
+	resul=api.model_ids('song/detail',uid)
 	print('\n此歌曲的相关信息: ',end='')
-	api.info_real(result['songs'])
+	api.info_real(resul['songs'])
 	if mode=='0':
 		result=api.model_id('song/url',uid)['data'][0]
 		if result['url']==None:
@@ -271,6 +271,14 @@ if mode=='8':
 				print('\n开始自动下载...')
 				act=api.auto_dl(result['url'],api.info_limit(uid),result['type'])
 				os.system(act)
+				if read.auto_lyric:
+					part='lyric'
+					res=api.model_id(part,uid)
+					api.auto_lyric(res['lrc']['lyric'],api.info_limit(uid))
+				else:
+					pass
+				if read.auto_play:
+					api.lrc_play(read.player_core,api.info_limit(uid),read.lrc_path,read.music_dir,read.sleep_time)
 			sys.exit(1)
 	if mode=='1':
 		part='lyric'

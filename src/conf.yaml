@@ -18,8 +18,11 @@ auto_download: True
 ##0: 歌名+歌手+后缀;1: 歌手+歌名+后缀
 music_dltype: '1'
 
-##自动下载歌词
-auto_lyric: False
+##下载音乐或搜索歌词时自动下载歌词
+auto_lyric: True
+
+##下载音乐后自动播放
+auto_play: True
 
 ##歌单返回量
 playlist_limit: '10'
@@ -63,6 +66,10 @@ auto_ls: True
 ##本地播放器
 player_core: 'play '
 ##play为sox播放器,cvlc为vlc播放器,请务必带上最后的空格
+
+##歌词提前显示时间
+sleep_time: 
+##这个时间请尽量小,因为会叠加效果;如果时间长度大,说唱歌曲可能出词速度过快;可以精准到毫秒的十分之一
 
 ##歌词彩虹皮肤
 rainbow: False

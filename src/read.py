@@ -34,6 +34,8 @@ ui_len=conf['ui_len']
 rainbow=conf['rainbow']
 auto_ls=conf['auto_ls']
 pure_color=conf['pure_color']
+auto_play=conf['auto_play']
+sleep_time=conf['sleep_time']
 
 music_dir=dl_dir+'/音乐/'
 lrc_path=dl_dir+'/歌词/'
