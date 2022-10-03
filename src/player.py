@@ -56,6 +56,12 @@ def dl_list(uid):
 		if result['url']==None:
 			print('下载失败!')
 		else:
+			if read.auto_lyric:
+				part='lyric'
+				res=api.model_id(part,uid)
+				api.auto_lyric(res['lrc']['lyric'],api.info_limit(uid))
+			else:
+				pass
 			os.system(api.auto_dl(result['url'],api.info_limit(i),result['type']))
 			print(api.info_limit(i)+'下载完成!\n')
 
