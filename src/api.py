@@ -25,10 +25,10 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 		for l in lrc:
 			if name in l:
 				if name==l.split('.')[0]:
-					print('\n\033[1;36m已找到同名的歌词文件!\033[0m')
+					print('\n\033[1;36m已找到同名的歌词文件!\n\033[0m')
 					ls.append(l)
 				else:
-					print('\n\033[1;36m未找到同名的歌词文件,但找到可能相关的歌词文件!名称为: \033[1;32m'+str(l)+'\033[0m\033[1;36m 将使用该歌词文件!\033[0m')
+					print('\n\033[1;36m未找到同名的歌词文件,但找到可能相关的歌词文件!名称为: \033[1;32m'+str(l)+'\033[0m\033[1;36m 将使用该歌词文件!\n\033[0m')
 					ls.append(l)
 		for m in music:
 			mm=m.split('.')[0]
@@ -87,7 +87,7 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 		if '00:00.00' in ls[0][0]:
 			ls=ls
 		else:
-			ls.insert(0,['00:00.000','\n不规范的歌词文件,已自动修复!'])
+			ls.insert(0,['00:00.000','\n不规范的歌词文件,已自动修复!\n'])
 		do(ls,sleep_time)
 
 	def pla(player,file):
@@ -98,7 +98,7 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 		return False
 	if result[-1]==1:
 		music_name=result[0]
-		print('\n\033[1;36m没有找到歌词!\033[0m')
+		print('\n\033[1;36m没有找到歌词!\n\033[0m')
 		pla(player,music_path+get_good_name(music_name))
 	if result[-1]==2:
 		music_name=result[1]
@@ -109,10 +109,19 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 			player=player
 		t1=Thread(target=begin,args=(lrc_path+lrc_name,''))
 		t2=Thread(target=pla,args=(player,music_path+get_good_name(music_name)))
+		t1.daemon = True
+		t2.daemon = True
 		t1.start()
 		t2.start()
-		t1.join()
 		t2.join()
+		if t2.is_alive()!=True:
+			if t1.is_alive():
+				try:
+					t1._stop()
+				except:
+					print('\n\033[1;36m由于不规范的歌词或手动中断了歌曲,已中途退出!\n\033[0m')
+			else:
+				pass
 '''
 读取配置
 '''
