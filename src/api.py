@@ -103,10 +103,6 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 	if result[-1]==2:
 		music_name=result[1]
 		lrc_name=result[0]
-		if player=='cvlc ':
-			player='cvlc --play-and-exit '
-		else:
-			player=player
 		t1=Thread(target=begin,args=(lrc_path+lrc_name,''))
 		t2=Thread(target=pla,args=(player,music_path+get_good_name(music_name)))
 		t1.daemon = True

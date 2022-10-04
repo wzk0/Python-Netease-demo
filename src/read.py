@@ -41,6 +41,8 @@ music_dir=dl_dir+'/音乐/'
 lrc_path=dl_dir+'/歌词/'
 list_dir=dl_dir+'/本地歌单/'
 player_core=conf['player_core']
+if player_core=='cvlc ':
+	player_core='cvlc --play-and-exit '
 music_dir=get_good_name(music_dir)
 list_dir=get_good_name(list_dir)
 
@@ -52,7 +54,6 @@ def ls(lis):
 	for ls in lis:
 		print('\033[1;34m'+icon_ui*ui_len+'\033[0m\n')
 		print('\033[1;35;44m'+str(lis.index(ls))+'.\033[0m | \033[0m\033[1;36m'+ls+'\033[0m')
-
 
 '''
 读取cookies
