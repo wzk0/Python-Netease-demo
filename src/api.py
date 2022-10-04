@@ -87,7 +87,7 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 		if '00:00.00' in ls[0][0]:
 			ls=ls
 		else:
-			ls.insert(0,['00:00.000','\n不规范的歌词文件,已自动修复!\n'])
+			ls.insert(0,['00:00.000','\n不规范的歌词文件,已自动修复!'])
 		do(ls,sleep_time)
 
 	def pla(player,file):
