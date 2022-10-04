@@ -479,7 +479,6 @@ def play(thing,act):
 	else:
 		for name in thing:
 			n=name.split('.')
-			print(n[0])
 			lrc_play(act,n[0],read.lrc_path,read.music_dir,read.sleep_time)
 
 ##写入hash到文件
