@@ -475,10 +475,28 @@ def play(thing,act):
 	if thing=='a':
 		for name in os.listdir(read.music_dir):
 			n=name.split('.')[0].split('/')[-1]
+			if read.rainbow:
+				i=random.randint(30,37)
+				z=random.randint(40,47)
+				print('\033[1;'+str(i)+';'+str(z)+'m\n本首歌是:\n\n'+n+'\033[0m')
+			else:
+				if read.pure_color!=False:
+					print('\033[1;'+read.pure_color+'\n本首歌是:\n\n'+n+'\033[0m')
+				else:
+					print('\n本首歌是:\n\n'+n)
 			lrc_play(act,n,read.lrc_path,read.music_dir,read.sleep_time)
 	else:
 		for name in thing:
 			n=name.split('.')
+			if read.rainbow:
+				i=random.randint(30,37)
+				z=random.randint(40,47)
+				print('\033[1;'+str(i)+';'+str(z)+'m\n本首歌是:\n\n'+n[0]+'\033[0m')
+			else:
+				if read.pure_color!=False:
+					print('\033[1;'+read.pure_color+'\n本首歌是:\n\n'+n[0]+'\033[0m')
+				else:
+					print('\n本首歌是:\n\n'+n[0])
 			lrc_play(act,n[0],read.lrc_path,read.music_dir,read.sleep_time)
 
 ##写入hash到文件
@@ -486,12 +504,21 @@ def write_into(ipt,list_name):
 	hash_list=make_list(ipt)
 	with open(read.list_dir+list_name,'w')as f:
 		f.write('\n'.join(hash_list)+'\n')
-		
+
 ##通过hash播放歌曲
 def play_hash(hsh):
 	songs_list=dict(zip(list(get_dirhash().values()),list(get_dirhash().keys())))
 	name=songs_list[hsh]
 	n=name.split('.')
+	if read.rainbow:
+		i=random.randint(30,37)
+		z=random.randint(40,47)
+		print('\033[1;'+str(i)+';'+str(z)+'m\n本首歌是:\n\n'+n[0]+'\033[0m')
+	else:
+		if read.pure_color!=False:
+			print('\033[1;'+read.pure_color+'\n本首歌是:\n\n'+n[0]+'\033[0m')
+		else:
+			print('\n本首歌是:\n\n'+n[0])
 	lrc_play(read.player_core,n[0],read.lrc_path,read.music_dir,read.sleep_time)
 
 ##通过输入序号返回歌单的hash列表
