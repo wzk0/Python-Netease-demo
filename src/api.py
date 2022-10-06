@@ -6,6 +6,18 @@ import os
 import time
 from threading import Thread
 import random
+from mutagen.mp3 import MP3
+
+def color_print(sth):
+	if read.rainbow:
+		i=random.randint(30,37)
+		z=random.randint(40,47)
+		print('\033[1;'+str(i)+';'+str(z)+'m'+sth+'\033[0m')
+	else:
+		if read.pure_color!=False:
+			print('\033[1;'+read.pure_color+sth+'\033[0m')
+		else:
+			print(sth)
 
 '''
 歌词与音频双线程播放
@@ -48,50 +60,67 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 		else:
 			return 60*int(t[0])+float(t[1])
 
-	def begin(name,w):
+	def pla(player,file):
+		os.system("%s '%s'"%(player,file))
+
+	def show(dic,ttt,sleep_time):
+		ttt.start()
+		for l in dic:
+			t=float(sum(l.keys()))
+			if ttt.is_alive():
+				time.sleep(t-sleep_time)
+				color_print(str(l[t]))
+				if read.preview:
+					try:
+						nxt=dic.index(l)+1
+						nxt=dic[nxt]
+						nxt_t=float(sum(nxt.keys()))
+						nxt_d=nxt[nxt_t]
+						print('\033[1;30;40m'+str(nxt_t)+'秒后: '+nxt_d+'\033[0m')
+					except IndexError:
+						print('\033[1;30;40m歌词到底啦!\033[0m')
+			else:
+				color_print('\n你似乎手动终止了音乐...')
+				return
+		ttt.join()
+			
+	def analysis(name,ttt):
 		data=red(name)
 		ls=[]
 		for i in data:
 			tm=i.replace('[','').split(']')
 			ls.append(tm)
 		def do(ls,sleep_time):
+			dic=[]
 			for t in ls:
 				tm=t[0]
 				me=ls.index(t)
 				if me==0:
-					if read.rainbow:
-						i=random.randint(30,37)
-						z=random.randint(40,47)
-						print('\033[1;'+str(i)+';'+str(z)+'m'+t[1]+'\033[0m')
-					else:
-						if read.pure_color!=False:
-							print('\033[1;'+read.pure_color+t[1]+'\033[0m')
-						else:
-							print(t[1])
+					dic.append({0:t[1]})
 				else:
 					now=ls[me][0]
 					pre=ls[me-1][0]
 					if now=='':
 						pass
 					else:
-						time.sleep(get(now)-get(pre)-sleep_time)
-						if read.rainbow:
-							i=random.randint(30,37)
-							z=random.randint(40,47)
-							print('\033[1;'+str(i)+';'+str(z)+'m'+t[1]+'\033[0m')
-						else:
-							if read.pure_color!=False:
-								print('\033[1;'+read.pure_color+t[1]+'\033[0m')
-							else:
-								print(t[1])
+						lls=[]
+						slt=get(now)-get(pre)-sleep_time-sleep_time
+						lls.append(slt)
+						llls=[]
+						llls.append(t[1])
+						dic.append(dict(zip(lls,llls)))
+			return dic
 		if '00:00.00' in ls[0][0]:
 			ls=ls
 		else:
 			ls.insert(0,['00:00.000','\n不规范的歌词文件,已自动修复!'])
-		do(ls,sleep_time)
+		return do(ls,sleep_time)
 
-	def pla(player,file):
-		os.system(player+' '+file)
+	def get_at(dic):
+		ls=[]
+		for d in dic:
+			ls.append(sum(d.keys()))
+		return sum(ls)
 
 	result=find(lrc_name,lrc_path,music_path)
 	if result[-1]==0:
@@ -99,25 +128,21 @@ def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
 	if result[-1]==1:
 		music_name=result[0]
 		print('\n\033[1;36m没有找到歌词!\n\033[0m')
+		MP3(music_path+get_good_name(music_name)).info.length
 		pla(player,music_path+get_good_name(music_name))
 	if result[-1]==2:
 		music_name=result[1]
 		lrc_name=result[0]
-		t1=Thread(target=begin,args=(lrc_path+lrc_name,''))
-		t2=Thread(target=pla,args=(player,music_path+get_good_name(music_name)))
-		t1.daemon = True
-		t2.daemon = True
-		t1.start()
-		t2.start()
-		t2.join()
-		if t2.is_alive()!=True:
-			if t1.is_alive():
-				try:
-					t1._stop()
-				except:
-					print('\n\033[1;36m由于不规范的歌词或手动中断了歌曲,已中途退出!\n\033[0m')
-			else:
-				pass
+		ttt=Thread(target=pla,args=(player,music_path+get_good_name(music_name)))
+		ttt.daemon=True
+		length=MP3(music_path+get_good_name(music_name)).info.length
+		res=analysis(lrc_path+lrc_name,ttt)
+		if get_at(res)>length:
+			print('\033[1;36m此歌词文件中写明的时长与歌曲实际时长不符,请将此歌曲文件\033[1;32m'+lrc_path+lrc_name+'\033[0m\033[1;36m的最后一行进行修改后再重新播放.已自动跳过该首歌!\n\033[0m')
+			return 1
+		else:
+			show(res,ttt,sleep_time)
+
 '''
 读取配置
 '''
@@ -318,8 +343,8 @@ def mvid(part,uid):
 会调用此函数返回下载指令
 '''
 def auto_dl(url,name,music_type):
-	act='wget '+url+' -O '+read.dl_dir+'/音乐/'+name+'.'+music_type
-	return act
+	name=read.dl_dir+'/音乐/'+name+'.'+music_type
+	return "wget %s -O '%s'"%(url,name)
 
 '''
 自动下载歌词设置开启时

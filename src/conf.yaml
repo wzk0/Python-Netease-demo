@@ -1,5 +1,5 @@
 ##API服务器
-server: 'http://192.168.1.9:3000/'
+server: 'http://localhost:3000/'
 ##请务必携带最后的/!
 
 ##UI符号
@@ -28,7 +28,7 @@ auto_play: True
 playlist_limit: '10'
 
 ##历史评论返回量
-history_limit: '10'
+history_limit: '15'
 
 ##歌手热门曲返回量
 singersongs_limit: '5'
@@ -37,10 +37,10 @@ singersongs_limit: '5'
 songs_limit: '10'
 
 ##搜索结果返回量
-search_limit: '5'
+search_limit: '10'
 
 ##资源评论返回量
-comment_limit: '5'
+comment_limit: '15'
 
 ##收藏专辑返回量
 album_limit: '5'
@@ -64,7 +64,7 @@ auto_id: True
 auto_ls: True
 
 ##本地播放器
-player_core: 'play '
+player_core: 'cvlc '
 ##play为sox播放器,cvlc为vlc播放器,请务必带上最后的空格
 
 ##歌词提前显示时间
@@ -76,7 +76,7 @@ rainbow: False
 ##开启后会在播放音乐时在终端显示实时炫彩颜色歌词,False为黑白色
 
 ##歌词皮肤
-pure_color: '30;40m'
+pure_color: '34;47m'
 ##几个配色方案,不设置请输入False,则显示为黑白色;不可与歌词彩虹皮肤同时开启
 ## 31;47m - 橘子灰橙
 ## 33;41m - 钢铁侠红
@@ -86,3 +86,6 @@ pure_color: '30;40m'
 ## 33;44m - 靛青咖喱
 ## 37;43m - 咖啡焦糖
 ## 30;40m - 影子黑灰
+
+preview: True
+##将会以影子黑灰在歌词下一行位置后显示下一句歌词和等待秒数
