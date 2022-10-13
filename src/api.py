@@ -24,30 +24,25 @@ def color_print(sth):
 '''
 
 def lrc_play(player,lrc_name,lrc_path,music_path,sleep_time):
-		
+	
 	def find(name,lrc_path,music_path):
 		lrc=os.listdir(lrc_path)
 		music=os.listdir(music_path)
 		ls=[]
 		for l in lrc:
-			if read.analysis==0:
-				condition=name in l
-			elif read.analysis==1:
-				condition=l in name
-			if read.analysis==2:
-				if name==l.split('.')[0]:
-					print('\n\033[1;36m已找到同名的歌词文件!\n\033[0m')
-					ls.append(l)
-				else:
-					pass
+			if name==l.split('.')[0]:
+				print('\n\033[1;36m已找到同名的歌词文件!\n\033[0m')
+				ls.append(l)
 			else:
+				if read.analysis==0:
+					condition=name in l
+				elif read.analysis==1:
+					condition=l in name
+				else:
+					condition=False
 				if condition:
-					if name==l.split('.')[0]:
-						print('\n\033[1;36m已找到同名的歌词文件!\n\033[0m')
-						ls.append(l)
-					else:
-						print('\n\033[1;36m未找到同名的歌词文件,但找到可能相关的歌词文件!名称为: \033[1;32m'+str(l)+'\033[0m\033[1;36m 将使用该歌词文件!\n\033[0m')
-						ls.append(l)
+					print('\n\033[1;36m未找到同名的歌词文件,但找到可能相关的歌词文件!名称为: \033[1;32m'+str(l)+'\033[0m\033[1;36m 将使用该歌词文件!\n\033[0m')
+					ls.append(l)
 		for m in music:
 			mm=m.split('.')[0]
 			if name==mm:
