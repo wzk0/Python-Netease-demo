@@ -37,6 +37,7 @@ pure_color=conf['pure_color']
 auto_play=conf['auto_play']
 sleep_time=conf['sleep_time']
 preview=conf['preview']
+analysis=conf['analysis']
 
 music_dir=dl_dir+'/音乐/'
 lrc_path=dl_dir+'/歌词/'

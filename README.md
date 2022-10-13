@@ -105,7 +105,7 @@ nano src/conf.yaml
 ├── 本地歌单
 │   └── hello-world ##本地歌单名
 ├── 歌词
-│   └── K-forest-Find_Me.txt    ##歌词文件
+│   └── K-forest-Find_Me.lrc    ##歌词文件
 ├── 列表
 │   └── 911    ##列表文件
 └── 音乐
@@ -132,17 +132,16 @@ nano src/conf.yaml
     └── read.py		##读取配置和检查
 ```
 
-由于我比较懒,加上之前那个本地播放器功能问题实在是太多,所以我直接复制了[另一个项目](https://github.com/wzk0/terminal-player)的东西过来...
+由于我比较懒,加上之前那个本地播放器功能问题实在是太多,所以我基本上是直接复制了[另一个项目](https://github.com/wzk0/terminal-player)的东西过来...
 
 ---
 
 ## 相关
 
-由于我没有服务器,所以请自行寻找API服务器(我调试的时候用的是手机跑API,内网使用)
+由于我没有服务器,所以请自行寻找API服务器.
 
 API功能 - [网易云音乐 Node.js API service](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
 终端播放器功能 - [一个根据文件hash操作的,基于sox或cvlc的终端播放器.](https://github.com/wzk0/terminal-player)
-
 
 终端实时滚动歌词功能 - [通过sleep实现的终端lrc歌词文件解析和实时展示.](https://github.com/wzk0/lrc-timely)
