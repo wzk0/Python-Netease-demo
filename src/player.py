@@ -58,8 +58,8 @@ def dl_list(uid):
 		else:
 			if read.auto_lyric:
 				part='lyric'
-				res=api.model_id(part,uid)
-				api.auto_lyric(res['lrc']['lyric'],api.info_limit(uid))
+				res=api.model_id(part,i)
+				api.auto_lyric(res['lrc']['lyric'],api.info_limit(i))
 			else:
 				pass
 			os.system(api.auto_dl(result['url'],api.info_limit(i),result['type']))

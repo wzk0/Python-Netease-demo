@@ -7,6 +7,7 @@ import time
 from threading import Thread
 import random
 from mutagen.mp3 import MP3
+import re
 
 def color_print(sth):
 	if read.rainbow:
@@ -377,14 +378,11 @@ def info_limit(uid):
 		name=ele['name']
 		uid=str(ele['id'])
 		ar=ele['ar'][0]['name']
+		rstr = r"[\/\\\:\*\?\"\<\>\|\(\)]"  # '/ \ : * ? " < > |'
 		name=name.replace(' ','_')
-		name=name.replace('(','_')
-		name=name.replace(')','')
-		name=name.replace('\'','')
+		name=re.sub(rstr,"_",name)
 		ar=ar.replace(' ','_')
-		ar=ar.replace('(','_')
-		ar=ar.replace(')','')
-		ar=ar.replace('\'','')
+		ar=re.sub(rstr,"_",ar)
 		if read.music_dltype=='0':
 			return name+'-'+ar
 		else:
